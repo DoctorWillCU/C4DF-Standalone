@@ -1021,6 +1021,9 @@
     <ClInclude Include="CvCityManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="C4DFMod.h">
+      <Filter>Dll Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="CvGameCoreDLL.rc" />

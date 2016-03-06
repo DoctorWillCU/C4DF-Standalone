@@ -246,6 +246,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="banned.h" />
+    <ClInclude Include="C4DFMod.h" />
     <ClInclude Include="CvAchievementUnlocker.h" />
     <ClInclude Include="CvAdvisorCounsel.h" />
     <ClInclude Include="CvAdvisorRecommender.h" />
