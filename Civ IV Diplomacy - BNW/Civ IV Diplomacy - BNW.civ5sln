@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# ModBuddy Solution File, Format Version 11.00
+Project("{F5FC21B5-7CC2-458A-ABBA-992F515BBA20}") = "Civ IV Diplomacy", "Civ IV Diplomatic Features\Civ IV Diplomacy.civ5proj", "{275DB698-0C69-401E-89A8-7EAB501B6BCF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|x86 = Default|x86
+		Deploy Only|x86 = Deploy Only|x86
+		Package Only|x86 = Package Only|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{275DB698-0C69-401E-89A8-7EAB501B6BCF}.Default|x86.ActiveCfg = Default|x86
+		{275DB698-0C69-401E-89A8-7EAB501B6BCF}.Default|x86.Build.0 = Default|x86
+		{275DB698-0C69-401E-89A8-7EAB501B6BCF}.Deploy Only|x86.ActiveCfg = Deploy Only|x86
+		{275DB698-0C69-401E-89A8-7EAB501B6BCF}.Deploy Only|x86.Build.0 = Deploy Only|x86
+		{275DB698-0C69-401E-89A8-7EAB501B6BCF}.Package Only|x86.ActiveCfg = Package Only|x86
+		{275DB698-0C69-401E-89A8-7EAB501B6BCF}.Package Only|x86.Build.0 = Package Only|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

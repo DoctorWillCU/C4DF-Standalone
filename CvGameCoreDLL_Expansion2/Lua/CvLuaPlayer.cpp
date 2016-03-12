@@ -1006,6 +1006,7 @@ void CvLuaPlayer::PushMethods(lua_State* L, int t)
 	Method(GetVassalTreatmentToolTip);
 	Method(GetVassalIndependenceTooltipAsMaster);
 	Method(GetVassalIndependenceTooltipAsVassal);
+	Method(GetMajorityReligion); // from CPP
 #endif
 }
 //------------------------------------------------------------------------------
@@ -11323,6 +11324,15 @@ int CvLuaPlayer::lGetVassalIndependenceTooltipAsVassal(lua_State* L)
 {
 	CvPlayerAI* pkPlayer = GetInstance(L);
 	lua_pushstring(L, pkPlayer->GetVassalIndependenceTooltipAsVassal());
+	return 1;
+}
+
+// from CPP
+int CvLuaPlayer::lGetMajorityReligion(lua_State* L)
+{
+	CvPlayer* pkPlayer = GetInstance(L);
+	const ReligionTypes eReligion = pkPlayer->GetReligions()->GetReligionInMostCities();
+	lua_pushinteger(L, eReligion);
 	return 1;
 }
 

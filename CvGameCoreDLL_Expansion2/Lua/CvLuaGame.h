@@ -377,14 +377,14 @@ protected:
 	static int lGetNumHiddenArchaeologySites(lua_State *L);
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	LUAAPIEXTN(GetMinimumVoluntaryVassalTurns, int);
-	LUAAPIEXTN(GetMinimumVassalTurns, int);
-	LUAAPIEXTN(GetNumTurnsBetweenVassals, int);
-	LUAAPIEXTN(GetMinimumVassalTax, int);
-	LUAAPIEXTN(GetMaximumVassalTax, int);
-	LUAAPIEXTN(GetMinimumVassalLiberateTurns, int);
-	LUAAPIEXTN(GetMinimumVassalTaxTurns, int);
-	LUAAPIEXTN(GetVassalageEnabledEra, int);
+	static int lGetMinimumVoluntaryVassalTurns(lua_State* L);
+	static int lGetMinimumVassalTurns(lua_State* L);
+	static int lGetNumTurnsBetweenVassals(lua_State* L);
+	static int lGetMinimumVassalTax(lua_State* L);
+	static int lGetMaximumVassalTax(lua_State* L);
+	static int lGetMinimumVassalLiberateTurns(lua_State* L);
+	static int lGetMinimumVassalTaxTurns(lua_State* L);
+	static int lGetVassalageEnabledEra(lua_State* L);
 #endif
 };
 

@@ -993,27 +993,28 @@ protected:
 	static int lGetLiberationPreviewString(lua_State* L);
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	LUAAPIEXTN(GetVassalGoldMaintenance, int);
-	LUAAPIEXTN(IsVassalageAcceptable, bool, iOtherPlayer);
-	LUAAPIEXTN(GetYieldPerTurnFromVassals, int);
-	LUAAPIEXTN(GetHappinessFromVassals, int);
-	LUAAPIEXTN(GetScoreFromVassals, int);
-	LUAAPIEXTN(GetMilitaryAggressivePosture, int, iOtherPlayer);
-	LUAAPIEXTN(MoveRequestTooSoon, bool, iOtherPlayer);
-	LUAAPIEXTN(GetPlayerMoveTroopsRequestCounter, int, iOtherPlayer);
-	LUAAPIEXTN(GetExpensePerTurnFromVassalTaxes, int);
-	LUAAPIEXTN(GetMyShareOfVassalTaxes, int);
-	LUAAPIEXTN(GetVassalTaxContribution, int);
-	LUAAPIEXTN(GetVassalScore, int);
-	LUAAPIEXTN(GetVassalTreatedScore, int);
-	LUAAPIEXTN(GetVassalDemandScore, int);
-	LUAAPIEXTN(GetVassalTaxScore, int);
-	LUAAPIEXTN(GetVassalProtectScore, int);
-	LUAAPIEXTN(GetVassalFailedProtectScore, int);
-	LUAAPIEXTN(GetVassalTreatmentLevel, int);
-	LUAAPIEXTN(GetVassalTreatmentToolTip, CvString, iOtherPlayer);
-	LUAAPIEXTN(GetVassalIndependenceTooltipAsMaster, CvString, iOtherPlayer);
-	LUAAPIEXTN(GetVassalIndependenceTooltipAsVassal, CvString);
+	static int lGetVassalGoldMaintenance(lua_State* L);
+	static int lIsVassalageAcceptable(lua_State* L);
+	static int lGetYieldPerTurnFromVassals(lua_State* L);
+	static int lGetHappinessFromVassals(lua_State* L);
+	static int lGetScoreFromVassals(lua_State* L);
+	static int lGetMilitaryAggressivePosture(lua_State* L);
+	static int lMoveRequestTooSoon(lua_State* L);
+	static int lGetPlayerMoveTroopsRequestCounter(lua_State* L);
+	static int lGetExpensePerTurnFromVassalTaxes(lua_State* L);
+	static int lGetMyShareOfVassalTaxes(lua_State* L);
+	static int lGetVassalTaxContribution(lua_State* L);
+	static int lGetVassalScore(lua_State* L);
+	static int lGetVassalTreatedScore(lua_State* L);
+	static int lGetVassalDemandScore(lua_State* L);
+	static int lGetVassalTaxScore(lua_State* L);
+	static int lGetVassalProtectScore(lua_State* L);
+	static int lGetVassalFailedProtectScore(lua_State* L);
+	static int lGetVassalTreatmentLevel(lua_State* L);
+	static int lGetVassalTreatmentToolTip(lua_State* L);
+	static int lGetVassalIndependenceTooltipAsMaster(lua_State* L);
+	static int lGetVassalIndependenceTooltipAsVassal(lua_State* L);
+	static int lGetMajorityReligion(lua_State* L);	// from CPP
 #endif
 };
 
