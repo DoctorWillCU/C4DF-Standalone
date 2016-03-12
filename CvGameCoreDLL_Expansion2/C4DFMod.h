@@ -10,4 +10,10 @@
 #define MOD_DLL_C4DF_NAME "Civilization IV Diplomatic Features v1"
 #define MOD_DLL_C4DF_VERSION_NUMBER ((uint) 1)
 
+// LUA API wrappers
+// Thanks Community Patch Project - copying here because lazy
+#define LUAAPIEXTN(method, type, ...) static int l##method(lua_State* L)
+#define LUAAPIIMPL(object, method) int CvLua##object::l##method(lua_State* L) { return BasicLuaMethod(L, &Cv##object::##method); }
+#define LUAAPIINLINE(method, hasMethod, type) inline bool method() const { return hasMethod(type); }
+
 #endif

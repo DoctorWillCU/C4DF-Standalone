@@ -223,7 +223,9 @@ public:
 	bool AllowsFoodTradeRoutes() const;
 	bool AllowsProductionTradeRoutes() const;
 	bool NullifyInfluenceModifier() const;
-
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	bool IsVassalLevyEra() const;
+#endif
 	const char* GetArtDefineTag() const;
 	void SetArtDefineTag(const char* szVal);
 	const bool GetArtInfoCulturalVariation() const;
@@ -408,6 +410,9 @@ private:
 	int m_iPreferredDisplayPosition;
 	int m_iPortraitIndex;
 
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	bool m_bVassalLevyEra;
+#endif
 	bool m_bTeamShare;
 	bool m_bWater;
 	bool m_bRiver;

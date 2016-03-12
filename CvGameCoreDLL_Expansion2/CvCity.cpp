@@ -6094,6 +6094,22 @@ void CvCity::processBuilding(BuildingTypes eBuilding, int iChange, bool bFirst, 
 				ChangeTerrainExtraYield(((TerrainTypes)iJ), eYield, (GC.getBuildingInfo(eBuilding)->GetTerrainYieldChange(iJ, eYield) * iChange));
 			}
 
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+			// Research agreements are not active, therefore this building now increases science yield by 25%
+			if(MOD_DIPLOMACY_CIV4_FEATURES && !GC.getGame().isOption(GAMEOPTION_RESEARCH_AGREEMENTS))
+			{
+				if(pBuildingInfo->GetMedianTechPercentChange() > 0)
+				{
+					if(eYield == YIELD_SCIENCE)
+					{
+						int iChange = pBuildingInfo->GetMedianTechPercentChange(); //default 25
+					
+						changeYieldRateModifier(eYield, iChange);
+					}
+				}
+			}
+#endif
+
 			if(pBuildingInfo->GetEnhancedYieldTech() != NO_TECH)
 			{
 				if(owningTeam.GetTeamTechs()->HasTech((TechTypes)pBuildingInfo->GetEnhancedYieldTech()))

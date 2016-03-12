@@ -405,6 +405,10 @@ public:
 	int getPlotBuyCostModifier() const;
 	void changePlotBuyCostModifier(int iChange);
 
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	bool IsVassalLevyEra() const;
+#endif
+
 	int getHealRate() const;
 	void changeHealRate(int iChange);
 

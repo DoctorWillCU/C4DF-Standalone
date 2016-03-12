@@ -991,6 +991,30 @@ protected:
 	// Warmongering
 	static int lGetWarmongerPreviewString(lua_State* L);
 	static int lGetLiberationPreviewString(lua_State* L);
+
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	LUAAPIEXTN(GetVassalGoldMaintenance, int);
+	LUAAPIEXTN(IsVassalageAcceptable, bool, iOtherPlayer);
+	LUAAPIEXTN(GetYieldPerTurnFromVassals, int);
+	LUAAPIEXTN(GetHappinessFromVassals, int);
+	LUAAPIEXTN(GetScoreFromVassals, int);
+	LUAAPIEXTN(GetMilitaryAggressivePosture, int, iOtherPlayer);
+	LUAAPIEXTN(MoveRequestTooSoon, bool, iOtherPlayer);
+	LUAAPIEXTN(GetPlayerMoveTroopsRequestCounter, int, iOtherPlayer);
+	LUAAPIEXTN(GetExpensePerTurnFromVassalTaxes, int);
+	LUAAPIEXTN(GetMyShareOfVassalTaxes, int);
+	LUAAPIEXTN(GetVassalTaxContribution, int);
+	LUAAPIEXTN(GetVassalScore, int);
+	LUAAPIEXTN(GetVassalTreatedScore, int);
+	LUAAPIEXTN(GetVassalDemandScore, int);
+	LUAAPIEXTN(GetVassalTaxScore, int);
+	LUAAPIEXTN(GetVassalProtectScore, int);
+	LUAAPIEXTN(GetVassalFailedProtectScore, int);
+	LUAAPIEXTN(GetVassalTreatmentLevel, int);
+	LUAAPIEXTN(GetVassalTreatmentToolTip, CvString, iOtherPlayer);
+	LUAAPIEXTN(GetVassalIndependenceTooltipAsMaster, CvString, iOtherPlayer);
+	LUAAPIEXTN(GetVassalIndependenceTooltipAsVassal, CvString);
+#endif
 };
 
 #endif //CVLUAPLAYER_H

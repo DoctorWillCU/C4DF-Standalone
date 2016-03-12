@@ -511,6 +511,13 @@ bool CvDangerPlots::ShouldIgnorePlayer(PlayerTypes ePlayer)
 		}
 	}
 
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	//ignore if one is vassal of the other
+	if ( GET_TEAM(GET_PLAYER(m_ePlayer).getTeam()).IsVassal(GET_PLAYER(ePlayer).getTeam()) ||
+		 GET_TEAM(GET_PLAYER(ePlayer).getTeam()).IsVassal(GET_PLAYER(m_ePlayer).getTeam()) )
+		 return true;
+#endif
+
 	return false;
 }
 

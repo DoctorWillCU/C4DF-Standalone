@@ -124,6 +124,10 @@ struct CvResolutionEffects
 	int iScienceyGreatPersonRateMod;
 	int iGreatPersonTileImprovementCulture;
 	int iLandmarkCulture;
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	int iVassalMaintenanceGoldPercent;
+	bool bEndAllCurrentVassals;
+#endif
 };
 
 FDataStream& operator>>(FDataStream&, CvResolutionEffects&);
@@ -1229,6 +1233,10 @@ public:
 	int GetScienceyGreatPersonRateMod() const;
 	int GetGreatPersonTileImprovementCulture() const;
 	int GetLandmarkCulture() const;
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	int GetVassalMaintenanceGoldPercent() const;
+	bool IsEndAllCurrentVassals() const;
+#endif
 
 protected:
 	ResolutionDecisionTypes m_eVoterDecision;
@@ -1264,6 +1272,10 @@ protected:
 	int m_iScienceyGreatPersonRateMod;
 	int m_iGreatPersonTileImprovementCulture;
 	int m_iLandmarkCulture;
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	int m_iVassalMaintenanceGoldPercent;
+	bool m_bEndAllCurrentVassals;
+#endif
 
 private:
 	CvResolutionEntry(const CvResolutionEntry&);

@@ -212,6 +212,33 @@ protected:
 	static int lSetCurrentEra(lua_State* L);
 
 	static int lUpdateEmbarkGraphics(lua_State* L);
+
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	LUAAPIEXTN(IsVassal, bool, iteam);
+	LUAAPIEXTN(CanBecomeVassal, bool, iTeam);
+	LUAAPIEXTN(CanMakeVassal, bool, iTeam);
+	LUAAPIEXTN(CanEndVassal, bool, iTeam);
+	LUAAPIEXTN(CanEndAllVassal, bool, iTeam);
+	LUAAPIEXTN(IsVassalageTradingAllowed, bool);
+	LUAAPIEXTN(GetNumTurnsIsVassal, int, iTeam);
+	LUAAPIEXTN(GetNumTurnsSinceVassalEnded, int, iTeam);
+	LUAAPIEXTN(IsTooSoonForVassal, bool, iTeam);
+	LUAAPIEXTN(IsVassalOfSomeone, bool);
+	LUAAPIEXTN(IsVassalLockedIntoWar, bool, iTeam);
+	LUAAPIEXTN(GetMaster, int);
+	LUAAPIEXTN(IsVoluntaryVassal, bool, iTeam);
+	LUAAPIEXTN(DoBecomeVassal, void, iTeam, bVoluntary);
+	LUAAPIEXTN(DoEndVassal, void, iTeam, bPeaceful, bSuppressNotification);
+	LUAAPIEXTN(GetNumCitiesWhenVassalMade, int);
+	LUAAPIEXTN(GetTotalPopulationWhenVassalMade, int);
+	LUAAPIEXTN(CanLiberateVassal, bool, iTeam);
+	LUAAPIEXTN(DoLiberateVassal, void, iTeam);
+	LUAAPIEXTN(DoApplyVassalTax, void, iPlayer, iAmount);
+	LUAAPIEXTN(CanSetVassalTax, bool, iPlayer);
+	LUAAPIEXTN(GetVassalTax, int, iPlayer);
+	LUAAPIEXTN(GetNumTurnsSinceVassalTaxSet, int, iPlayer);
+	LUAAPIEXTN(GetNumVassals, int);
+#endif
 };
 
 #endif //CVLUATEAM_H

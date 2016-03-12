@@ -3302,6 +3302,15 @@ CvGameSpeedInfo::CvGameSpeedInfo() :
 	m_iReligiousPressureAdjacentCity(0),
 	m_iVictoryDelayPercent(0),
 	m_iMinorCivElectionFreqMod(0),
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	m_iShareOpinionDuration(0),
+	m_iTechCostPerTurnMultiplier(0),
+	m_iMinimumVoluntaryVassalTurns(0),
+	m_iMinimumVassalTurns(0),
+	m_iMinimumVassalTaxTurns(0),
+	m_iNumTurnsBetweenVassals(0),
+	m_iMinimumVassalLiberateTurns(0),
+#endif
 	m_iLeaguePercent(0),
 	m_iNumTurnIncrements(0),
 	m_pGameTurnInfo(NULL)
@@ -3514,6 +3523,18 @@ bool CvGameSpeedInfo::CacheResults(Database::Results& kResults, CvDatabaseUtilit
 	m_iRelationshipDuration			= kResults.GetInt("RelationshipDuration");
 	m_iLeaguePercent				= kResults.GetInt("LeaguePercent");
 
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	if (MOD_DIPLOMACY_CIV4_FEATURES) {
+		m_iShareOpinionDuration			= kResults.GetInt("ShareOpinionDuration");
+		m_iTechCostPerTurnMultiplier	= kResults.GetInt("TechCostPerTurnMultiplier");
+		m_iMinimumVoluntaryVassalTurns	= kResults.GetInt("MinimumVoluntaryVassalTurns");
+		m_iMinimumVassalTurns			= kResults.GetInt("MinimumVassalTurns");
+		m_iMinimumVassalTaxTurns		= kResults.GetInt("MinimumVassalTaxTurns");
+		m_iNumTurnsBetweenVassals		= kResults.GetInt("NumTurnsBetweenVassals");
+		m_iMinimumVassalLiberateTurns		= kResults.GetInt("MinimumVassalLiberateTurns");
+	}
+#endif
+	
 	//GameTurnInfos
 	{
 		const char* szGameSpeedInfoType = GetType();
@@ -6550,6 +6571,11 @@ bool CvEraInfo::CacheResults(Database::Results& kResults, CvDatabaseUtility& kUt
 	m_iTradeRouteProductionBonusTimes100 = kResults.GetInt("TradeRouteProductionBonusTimes100");
 	m_iLeaguePercent			= kResults.GetInt("LeaguePercent");
 	m_iWarmongerPercent			= kResults.GetInt("WarmongerPercent");
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	if (MOD_DIPLOMACY_CIV4_FEATURES) {
+		m_bVassalageEnabled			= kResults.GetBool("VassalageEnabled");
+	}
+#endif
 
 	m_strCityBombardEffectTag	= kResults.GetText("CityBombardEffectTag");
 	m_uiCityBombardEffectTagHash = FString::Hash(m_strCityBombardEffectTag);
@@ -6802,3 +6828,47 @@ bool CvVoteSourceInfo::CacheResults(Database::Results& kResults, CvDatabaseUtili
 
 	return true;
 }
+
+
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+//------------------------------------------------------------------------------
+bool CvEraInfo::getVassalageEnabled() const
+{
+	return m_bVassalageEnabled;
+}
+//------------------------------------------------------------------------------
+int CvGameSpeedInfo::getShareOpinionDuration() const
+{
+	return m_iShareOpinionDuration;
+}
+//------------------------------------------------------------------------------
+int CvGameSpeedInfo::getTechCostPerTurnMultiplier() const
+{
+	return m_iTechCostPerTurnMultiplier;
+}
+//------------------------------------------------------------------------------
+int CvGameSpeedInfo::getMinimumVoluntaryVassalTurns() const
+{
+	return m_iMinimumVoluntaryVassalTurns;
+}
+//------------------------------------------------------------------------------
+int CvGameSpeedInfo::getMinimumVassalTurns() const
+{
+	return m_iMinimumVassalTurns;
+}
+//------------------------------------------------------------------------------
+int CvGameSpeedInfo::getMinimumVassalTaxTurns() const
+{
+	return m_iMinimumVassalTaxTurns;
+}
+//------------------------------------------------------------------------------
+int CvGameSpeedInfo::getMinimumVassalLiberateTurns() const
+{
+	return m_iMinimumVassalLiberateTurns;
+}
+//------------------------------------------------------------------------------
+int CvGameSpeedInfo::getNumTurnsBetweenVassals() const
+{
+	return m_iNumTurnsBetweenVassals;
+}
+#endif

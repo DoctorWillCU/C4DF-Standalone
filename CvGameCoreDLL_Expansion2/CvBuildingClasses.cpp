@@ -192,6 +192,11 @@ CvBuildingEntry::CvBuildingEntry(void):
 	m_ppiBuildingClassYieldChanges(NULL),
 	m_paiBuildingClassHappiness(NULL),
 	m_paThemingBonusInfo(NULL),
+
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	m_bVassalLevyEra(false),
+#endif
+
 	m_iNumThemingBonuses(0)
 {
 }
@@ -359,6 +364,13 @@ bool CvBuildingEntry::CacheResults(Database::Results& kResults, CvDatabaseUtilit
 	m_iExtraLeagueVotes = kResults.GetInt("ExtraLeagueVotes");
 	m_iPreferredDisplayPosition = kResults.GetInt("DisplayPosition");
 	m_iPortraitIndex = kResults.GetInt("PortraitIndex");
+
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	if(MOD_DIPLOMACY_CIV4_FEATURES)
+	{
+		m_bVassalLevyEra = kResults.GetBool("VassalLevyEra");
+	}
+#endif
 
 	m_bArtInfoCulturalVariation = kResults.GetBool("ArtInfoCulturalVariation");
 	m_bArtInfoEraVariation = kResults.GetBool("ArtInfoEraVariation");
@@ -841,6 +853,13 @@ int CvBuildingEntry::GetProductionCost() const
 {
 	return m_iProductionCost;
 }
+
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+bool CvBuildingEntry::IsVassalLevyEra() const
+{
+	return m_bVassalLevyEra;
+}
+#endif
 
 /// Faith to construct the unit (as a percentage of cost of next Great Prophet)
 int CvBuildingEntry::GetFaithCost() const
