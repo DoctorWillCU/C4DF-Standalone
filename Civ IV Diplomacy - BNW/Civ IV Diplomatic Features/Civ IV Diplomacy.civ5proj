@@ -6,9 +6,11 @@
     <Name>Civilization IV Diplomatic Features</Name>
     <Guid>47dd6204-89ab-4cf6-af4f-1327d2ce584c</Guid>
     <ModVersion>11</ModVersion>
-    <Stability>Beta</Stability>
+    <Stability>Stable</Stability>
     <Teaser>Adds new diplomatic features seen as in Civilization IV</Teaser>
-    <Description>REQUIRES BRAVE NEW WORLD[NEWLINE][NEWLINE]This mod adds new diplomatic features as they appeared in Civilization IV.[NEWLINE][NEWLINE]
+    <Description>Current Version: 11.0.0[NEWLINE]
+Savegame Compatible: 11.0.0 and up[NEWLINE]
+[NEWLINE][NEWLINE]This mod adds new diplomatic features as they appeared in Civilization IV.[NEWLINE][NEWLINE]
 [ICON_BULLET] Sharing Opinions: The AI will share their opinions of other leaders with you if they deem you a trustworthy ally.[NEWLINE]
 [ICON_BULLET] Map Trading: Sell World Maps upon discovery of Military Science. Cost goes up depending on the quality and quantity of terrain that is to be discovered - don't be surprised to chalk up a lot of cash/luxuries/your map for a map! Maps that are equal (no unique territory between two civs) are worthless.[NEWLINE]
 [ICON_BULLET] Technology Trading: Upon discovery of Scientific Theory, allows you to sell technology with other civs. The cost will be determined by how many turns left this technology has to be researched (by the purchasing civ). Enabling this option will disable Research Agreements. [COLOR_NEGATIVE_TEXT]THIS OPTION MUST BE ENABLED IN "ADVANCED OPTIONS" IN ORDER FOR THIS TO BE ACTIVE.[ENDCOLOR][NEWLINE]
@@ -18,8 +20,10 @@
 [NEWLINE]
 [COLOR_WARNING_TEXT]IMPORTANT NOTE:[ENDCOLOR][NEWLINE]
 This mod modifies the Civilization V Source Code (the DLL). It is not compatible with other mods that also modify the Civilization V Source Code (the DLL).[NEWLINE][NEWLINE]
-This mod modifies the Civilization V Lua. It MAY be compatible with other mods that also modify the Lua. Do to the amount of mods out there, and the number of potential conflicts, I cannot debug issues with this mod when used with other Lua mods. Please consult the github page for a full list of affected files.
-It is highly recommended that you play the Community Patch Project version of this mod (does not require Community Balance Patch). The Community Patch Project also includes several bugfixes and general improvements to the game that will enhance your gameplay experience. It is the recommended Civilization IV Diplomatic Features experience.</Description>
+This mod modifies the Civilization V Lua. It MAY be compatible with other mods that also modify the Lua. Do to the amount of mods out there, and the number of potential conflicts, I cannot debug issues with this mod when used with other Lua mods. Please consult the github page for a full list of affected files.[NEWLINE][NEWLINE]
+It is highly recommended that you play the Community Patch Project version of this mod (does not require Community Balance Patch). The Community Patch Project also includes several bugfixes and general improvements to the game that will enhance your gameplay experience. It is the recommended Civilization IV Diplomatic Features experience.[NEWLINE][NEWLINE]
+[COLOR_POSITIVE_TEXT]CONTACTING THE MOD CREATOR:[ENDCOLOR][NEWLINE]
+I am coordinating with the Community Patch Project now. While this mod has it's standalone version on Steam, the primary (and most supported) version will be Civilization IV Diplomatic Features - Community Patch. The Community Patch Project is located here: http://forums.civfanatics.com/forumdisplay.php?f=497. If you want to play beta versions of this mod, check out Community Patch!</Description>
     <Authors>Michael "Putmalk"</Authors>
     <SpecialThanks>The Community Patch Project for preserving this mod for three years.</SpecialThanks>
     <AffectsSavedGames>true</AffectsSavedGames>
