@@ -72,9 +72,9 @@ Subscribe from the Steam Workshop OR
 <li>int GetPlayerMoveTroopsRequestCounter(playerID eOtherPlayer); // Returns the number of turns in the move troops request counter (starts at 0 when request is made)</li>
 <li>int GetExpensePerTurnFromVassalTaxes(); // Get the number of GPT player is paying because of vassal taxes</li>
 <li>int GetMyShareOfVassalTaxes(); // Get the amount of GPT player is receiving from vassal taxes.</li>
-<li>int GetVassalTaxContribution(playerID eOtherPlayer); // Get the amount of GPT eOtherPlayer is contributing to us due to vassal taxes.<li>
+<li>int GetVassalTaxContribution(playerID eOtherPlayer); // Get the amount of GPT eOtherPlayer is contributing to us due to vassal taxes.</li>
 <li>int GetVassalScore(playerID eOtherPlayer); // Opinion weight change due to being a vassal.</li>
-<li>int GetVassalTreatedScore(playerID eOtherPlayer); // Score of how well our vassal eOtherPlayer thinks we've treated him during vassalage.<li>
+<li>int GetVassalTreatedScore(playerID eOtherPlayer); // Score of how well our vassal eOtherPlayer thinks we've treated him during vassalage.</li>
 <li>int GetVassalDemandScore(playerID eOtherPlayer); // Opinion weight change due to our demands of our vassal.</li>
 <li>int GetVassalProtectScore(playerID eOtherPlayer); // Opinion weight change due to our protection of vassal eOtherPlayer.</li>
 <li>int GetVassalFailedProtectScore(playerID eOtherPlayer); // Opinion weight change due to our failed protection of vassal eOtherPlayer.</li>
