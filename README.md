@@ -19,9 +19,15 @@
 <strong>This mod hosted here is the standalone, Brave New World version. Gods and Kings is no longer supported.</strong>
 
 <h1>Install Instructions:</h1>
+Subscribe from the Steam Workshop OR
+
 <ol>
-<li><a href="">COMING SOON: LINK</a></li>
+<li>Down mod from <a href="https://mega.nz/#fm/fAtwnaBZ"></a></li>
+<li>Extract to My Games/Civilization V/MODS/ folder</li>
+<li>Delete existing Civilization IV Diplomatic Features install</li>
+<li>Open Civilization V</li>
 <li>Subscribe to the mod on the Steam Workshop</li>
+<li>Click MODS, wait for the .civ5mod file to extract</li>
 </ol>
 
 <h1>Compatibility</h1>

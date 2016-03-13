@@ -799,5 +799,8 @@
 		<Row Tag="TXT_KEY_TP_GOLD_VASSAL_MAINT">
 			<Text>{1_Num} spent on Vassal Maintenance.</Text>
 		</Row>
+		<Row Tag="TXT_KEY_TP_GOLD_VASSAL_TAX">
+			<Text>{1_Num} from Vassal Taxes.</Text>
+		</Row>
 	</Language_en_US>
 </GameData>
