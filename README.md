@@ -35,9 +35,59 @@ Subscribe from the Steam Workshop OR
 <li>Not compatible with mods that modify the DLL</li>
 <li>Not compatible with mods that modify the following Lua files:</li>
 <ol>
-<li>Coming soon!</li>
+<li></li>
 </ol>
 </ol>
 
 <h1>Lua API</h1>
-This mod comes with it's own Lua set of functions. Available soon!
+<b>Deal</b>
+<ul>
+<li>AddTechTrade( int playerID, int techID );</li>
+<li>AddVassalageTrade( int playerID );</li>
+<li>AddMapTrade( int playerID );</li>
+<li>AddRevokeVassalageTrade( int playerID );</li>
+</ul>
+
+<h2>Game</h2>
+<ul>
+<li>int GetMinimumVoluntaryVassalTurns(); // Returns minimum number of turns before a voluntary vassal can request independence</li>
+<li>int GetMinimumVassalTurns(); // Returns minimum number of turns before a capitulated vassal can request independence</li>
+<li>int GetNumTurnsBetweenVassals(); // Returns minimum number of turns before a player can re-vassalize a civilization that he ended vassalage with (in any means)</li>
+<li>int GetMinimumVassalTax(); // Returns the smallest amount that taxes can possibly go</li>
+<li>int GetMaximumVassalTax(); // Returns the highest amount that taxes can possibly go</li>
+<li>int GetMinimumVassalLiberateTurns(); // Returns the minimum number of turns a player must be a vassal before his master can liberate him</li>
+<li>int GetMinimumVassalTaxTurns(); // Returns the minimum number of turns before a player can set taxes (after they've been already set)</li>
+<li>eraID GetVassalageEnabledEra(); // Returns the era where Vassalage is enabled (-1 if none)</li>
+</ul>
+
+<h2>Player</h2>
+<ul>
+<li>int GetVassalGoldMaintenance(); // Returns the amount of gold this player is paying in maintenance.<li>
+<li>bool IsVassalageAcceptable(playerID eOtherPlayer); // Returns true if the player's diplomacy AI will accept vassalage from player (NOTE: this function should accept a second parameter bool bWar, not yet implemented!)<li>
+<li>int GetYieldPerTurnFromVassals(yieldID eYield); // Returns the yield per turn increase from player's vassals<li>
+<li>int GetHappinessFromVassals(); // Returns happiness increase from vassals.<li>
+<li>int GetScoreFromVassals(); // Returns score increase from vassals.<li>
+<li>MilitaryAggressivePostureTypes GetMilitaryAggressivePosture(playerID eOtherPlayer); // Returns how aggressive this player feels eOtherPlayer is being. (AGGRESSIVE_POSTURE_NONE, AGGRESSIVE_POSTURE_LOW, AGGRESSIVE_POSTURE_MEDIUM, AGGRESSIVE_POSTURE_HIGH)<li>
+<li>bool MoveRequestTooSoon(playerID eOtherPlayer); // Returns if it is too soon to ask for a move troops request<li>
+<li>int GetPlayerMoveTroopsRequestCounter(playerID eOtherPlayer); // Returns the number of turns in the move troops request counter (starts at 0 when request is made)<li>
+<li>int GetExpensePerTurnFromVassalTaxes(); // Get the number of GPT player is paying because of vassal taxes<li>
+<li>int GetMyShareOfVassalTaxes(); // Get the amount of GPT player is receiving from vassal taxes.<li>
+<li>int GetVassalTaxContribution(playerID eOtherPlayer); // Get the amount of GPT eOtherPlayer is contributing to us due to vassal taxes.<li>
+<li>int GetVassalScore(playerID eOtherPlayer); // Opinion weight change due to being a vassal.<li>
+<li>int GetVassalTreatedScore(playerID eOtherPlayer); // Score of how well our vassal eOtherPlayer thinks we've treated him during vassalage.<li>
+<li>int GetVassalDemandScore(playerID eOtherPlayer); // Opinion weight change due to our demands of our vassal.<li>
+<li>int GetVassalProtectScore(playerID eOtherPlayer); // Opinion weight change due to our protection of vassal eOtherPlayer.<li>
+<li>int GetVassalFailedProtectScore(playerID eOtherPlayer); // Opinion weight change due to our failed protection of vassal eOtherPlayer.<li>
+<li>int GetVassalTradeRouteScore(playerID eOtherPlayer); // Opinion weight change due to a trade route between us and vassal eOtherPlayer.<li>
+<li>int GetVassalReligionScore(playerID eOtherPlayer); // Opinion weight change due to shared (or unshared!) religion between us and vassal eOtherPlayer.<li>
+<li>int GetVassalTreatmentLevel(playerID eOtherPlayer); // Vassal opinion level of how our vassal eOtherPlayer sees us. (NO_VASSAL_TREATMENT, VASSAL_TREATMENT_CONTENT, VASSAL_TREATMENT_DISAGREE, VASSAL_TREATMENT_MISTREATED, VASSAL_TREATMENT_UNHAPPY, VASSAL_TREATMENT_ENSLAVED)<li>
+<li>string GetVassalTreatmentToolTip(playerID eOtherPlayer); // Get the tooltip for Vassal Treatment.<li>
+<li>string GetVassalIndependenceTooltipAsMaster(playerID ePlayer); // Get request independence when we are a master of ePlayer</li>
+<li>string GetVassalIndependenceTooltipAsVassal(playerID ePlayer); // Get request independence when we are a vassal of ePlayer</li>
+<li>int GetMajorityReligion(); // <b>From Community Patch: </b> Get our majority religion.</li>
+</ul>
+
+<h2>Team</h2>
+<ul>
+<li>Coming soon!</li>
+</ul>
