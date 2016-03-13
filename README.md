@@ -1,6 +1,7 @@
 # Civilization IV Diplomatic Features - Standalone
-Current version: 11.0.0003
-Current stability: Stable
+<strong>Current version:</strong> 11.0.0003
+
+<strong>Current stability:</strong> Stable
 
 <h1>Summary</h1>
 <p>Civilization IV Diplomatic Features is a modification for Civilization V. The goal is to provide as its title suggests: integrate Civilization IV's diplomacy into Civilization V. Upon the release of Civilization V, many felt it's diplomacy was lacking in several areas, making it feel more "gamey" and less "immersive" as Civilization IV. To help remedy that, my mod adds the following features:</p>
@@ -17,7 +18,7 @@ Current stability: Stable
 
 <strong>This mod hosted here is the standalone, Brave New World version. Gods and Kings is no longer supported.</strong>
 
-<strong>Install Instructions:</strong>
+<h1>Install Instructions:</h1>
 <ol>
 <li><a href="">COMING SOON: LINK</a></li>
 <li>Subscribe to the mod on the Steam Workshop</li>
