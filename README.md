@@ -18,15 +18,19 @@ Current stability: Stable
 <strong>This mod hosted here is the standalone, Brave New World version. Gods and Kings is no longer supported.</strong>
 
 <strong>Install Instructions:</strong>
-1) <a href="">COMING SOON: LINK</a>
-2) Subscribe to the mod on the Steam Workshop
+<ol>
+<li><a href="">COMING SOON: LINK</a></li>
+<li>Subscribe to the mod on the Steam Workshop</li>
+</ol>
 
 <h1>Compatibility</h1>
-1) Not compatible with mods that modify the DLL
-2) Not compatible with mods that modify the following Lua files:
-<ul>
+<ol>
+<li>Not compatible with mods that modify the DLL</li>
+<li>Not compatible with mods that modify the following Lua files:</li>
+<ol>
 <li>Coming soon!</li>
-</ul>
+</ol>
+</ol>
 
 <h1>Lua API</h1>
 This mod comes with it's own Lua set of functions. Available soon!
