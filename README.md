@@ -22,7 +22,7 @@
 Subscribe from the Steam Workshop OR
 
 <ol>
-<li>Down mod from <a href="https://mega.nz/#fm/fAtwnaBZ"></a></li>
+<li>Download mod from <a href="https://mega.nz/#fm/fAtwnaBZ">here</a></li>
 <li>Extract to My Games/Civilization V/MODS/ folder</li>
 <li>Delete existing Civilization IV Diplomatic Features install</li>
 <li>Open Civilization V</li>
