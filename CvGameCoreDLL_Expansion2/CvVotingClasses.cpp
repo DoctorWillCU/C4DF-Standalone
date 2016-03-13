@@ -10695,6 +10695,10 @@ CvResolutionEntry::CvResolutionEntry(void)
 	m_iScienceyGreatPersonRateMod		= 0;
 	m_iGreatPersonTileImprovementCulture= 0;
 	m_iLandmarkCulture					= 0;
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	m_iVassalMaintenanceGoldPercent		= 0;
+	m_bEndAllCurrentVassals				= false;
+#endif
 }
 
 CvResolutionEntry::~CvResolutionEntry(void)
@@ -10741,6 +10745,11 @@ bool CvResolutionEntry::CacheResults(Database::Results& kResults, CvDatabaseUtil
 	m_iScienceyGreatPersonRateMod		= kResults.GetInt("ScienceyGreatPersonRateMod");
 	m_iGreatPersonTileImprovementCulture= kResults.GetInt("GreatPersonTileImprovementCulture");
 	m_iLandmarkCulture					= kResults.GetInt("LandmarkCulture");
+
+#if defined(MOD_DIPLOMACY_CIV4_FEATURES)
+	m_iVassalMaintenanceGoldPercent		= kResults.GetInt("VassalMaintenanceGoldPercent");
+	m_bEndAllCurrentVassals				= kResults.GetBool("EndAllCurrentVassals");
+#endif
 
 	return true;
 }
