@@ -40,7 +40,7 @@ Subscribe from the Steam Workshop OR
 </ol>
 
 <h1>Lua API</h1>
-<b>Deal</b>
+<h2>Deal</h2>
 <ul>
 <li>AddTechTrade( int playerID, int techID );</li>
 <li>AddVassalageTrade( int playerID );</li>
