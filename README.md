@@ -1,5 +1,5 @@
 # Civilization IV Diplomatic Features - Standalone
-<strong>Current version:</strong> 11.0.0003
+<strong>Current version:</strong> 11.0.0004
 
 <strong>Current stability:</strong> Stable
 
