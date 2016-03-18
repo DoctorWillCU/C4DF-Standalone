@@ -86,6 +86,36 @@ I am coordinating with the Community Patch Project now. While this mod has it's 
         <Type>SetDllPath</Type>
         <FileName>CvGameCoreDLL_Expansion2.dll</FileName>
       </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/zn_Hant_HK/zh_Hant_HK_Text_CivilopediaC4DF.xml</FileName>
+      </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/zn_Hant_HK/zh_Hant_HK_Text_Generic_DiplomacyC4DF.xml</FileName>
+      </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/zn_Hant_HK/zh_Hant_HK_Text_UIC4DF.xml</FileName>
+      </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/zn_CN/zh_CN_Text_CivilopediaC4DF.xml</FileName>
+      </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/zn_CN/zh_CN_Text_Generic_DiplomacyC4DF.xml</FileName>
+      </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/zn_CN/zh_CN_Text_UIC4DF.xml</FileName>
+      </Action>
     </ModActions>
     <Homepage>http://steamcommunity.com/sharedfiles/filedetails/?id=141452526</Homepage>
     <ModDependencies>
@@ -255,6 +285,30 @@ I am coordinating with the Community Patch Project now. While this mod has it's 
       <SubType>Lua</SubType>
       <ImportIntoVFS>False</ImportIntoVFS>
     </Content>
+    <Content Include="XML\Text\zn_CN\zh_CN_Text_CivilopediaC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="XML\Text\zn_CN\zh_CN_Text_Generic_DiplomacyC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="XML\Text\zn_CN\zh_CN_Text_UIC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="XML\Text\zn_Hant_HK\zh_Hant_HK_Text_CivilopediaC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="XML\Text\zn_Hant_HK\zh_Hant_HK_Text_Generic_DiplomacyC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="XML\Text\zn_Hant_HK\zh_Hant_HK_Text_UIC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />
@@ -264,6 +318,8 @@ I am coordinating with the Community Patch Project now. While this mod has it's 
     <Folder Include="XML\Gameplay\" />
     <Folder Include="XML\Text\" />
     <Folder Include="XML\Text\en_US\" />
+    <Folder Include="XML\Text\zn_Hant_HK" />
+    <Folder Include="XML\Text\zn_CN" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Firaxis\ModBuddy\Civ5Mod.targets" />
 </Project>
