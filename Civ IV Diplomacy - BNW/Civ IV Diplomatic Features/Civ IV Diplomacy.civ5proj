@@ -8,7 +8,7 @@
     <ModVersion>11</ModVersion>
     <Stability>Stable</Stability>
     <Teaser>Civilization IV Diplomatic Features - Brave New World</Teaser>
-    <Description>Current Version: 11.0.3[NEWLINE]
+    <Description>Current Version: 11.0.7[NEWLINE]
 Savegame Compatible: 11.0.0 and up[NEWLINE]
 [NEWLINE][NEWLINE]This mod adds new diplomatic features as they appeared in Civilization IV.[NEWLINE][NEWLINE]
 [ICON_BULLET] Sharing Opinions: The AI will share their opinions of other leaders with you if they deem you a trustworthy ally.[NEWLINE]
@@ -25,15 +25,38 @@ It is highly recommended that you play the Community Patch Project version of th
 [COLOR_POSITIVE_TEXT]CONTACTING THE MOD CREATOR:[ENDCOLOR][NEWLINE]
 I am coordinating with the Community Patch Project now. While this mod has it's standalone version on Steam, the primary (and most supported) version will be Civilization IV Diplomatic Features - Community Patch. The Community Patch Project is located here: http://forums.civfanatics.com/forumdisplay.php?f=497. If you want to play beta versions of this mod, check out Community Patch!</Description>
     <Authors>Michael "Putmalk"</Authors>
-    <SpecialThanks>The Community Patch Project for preserving this mod for three years.</SpecialThanks>
+    <SpecialThanks>The Community Patch Project for preserving this mod for three years. Tino (Chinese translation),</SpecialThanks>
     <AffectsSavedGames>true</AffectsSavedGames>
     <MinCompatibleSaveVersion>11</MinCompatibleSaveVersion>
     <SupportsSinglePlayer>true</SupportsSinglePlayer>
     <SupportsMultiplayer>true</SupportsMultiplayer>
     <SupportsHotSeat>true</SupportsHotSeat>
     <SupportsMac>true</SupportsMac>
-    <AssemblyName>DLL Test</AssemblyName>
-    <RootNamespace>DLL Test</RootNamespace>
+    <AssemblyName>Civ IV Diplomatic Features</AssemblyName>
+    <RootNamespace>Civ IV Diplomatic Features</RootNamespace>
+    <ModBlockers>
+      <Association xmlns="">
+        <Type>Mod</Type>
+        <Name>(1a) Civ IV Diplomatic Features - CP</Name>
+        <Id>781d81cf-49e1-4acb-ae5f-b9e3713f98d3</Id>
+        <MinVersion>0</MinVersion>
+        <MaxVersion>999</MaxVersion>
+      </Association>
+      <Association xmlns="">
+        <Type>Mod</Type>
+        <Name>Community Patch</Name>
+        <Id>d1b6328c-ff44-4b0d-aad7-c657f83610cd</Id>
+        <MinVersion>0</MinVersion>
+        <MaxVersion>999</MaxVersion>
+      </Association>
+      <Association xmlns="">
+        <Type>Mod</Type>
+        <Name>Civilization IV Diplomatic Features - Community Balance Patch</Name>
+        <Id>c7bf7064-d1b1-4708-9e93-7a1560868582</Id>
+        <MinVersion>0</MinVersion>
+        <MaxVersion>999</MaxVersion>
+      </Association>
+    </ModBlockers>
     <ModReferences />
     <ModActions>
       <Action>
@@ -116,27 +139,45 @@ I am coordinating with the Community Patch Project now. While this mod has it's 
         <Type>UpdateDatabase</Type>
         <FileName>XML/Text/zn_CN/zh_CN_Text_UIC4DF.xml</FileName>
       </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/pl_PL/pl_PL_Text_CivilopediaC4DF.xml</FileName>
+      </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/pl_PL/pl_PL_Text_Generic_DiplomacyC4DF.xml</FileName>
+      </Action>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>XML/Text/pl_PL/pl_PL_Text_UIC4DF.xml</FileName>
+      </Action>
     </ModActions>
     <Homepage>http://steamcommunity.com/sharedfiles/filedetails/?id=141452526</Homepage>
-    <ModDependencies>
-      <Association>
-        <Type>Dlc</Type>
-        <Name>Expansion 2 - Brave New World</Name>
-        <Id>6DA07636-4123-4018-B643-6575B4EC336B</Id>
-        <MinVersion>0</MinVersion>
-        <MaxVersion>999</MaxVersion>
-      </Association>
-    </ModDependencies>
     <ReloadAudioSystem>false</ReloadAudioSystem>
     <ModContent>
       <Content>
         <Type>InGameUIAddin</Type>
         <Name>Vassalage Overview</Name>
         <Description>Vassalage Overview</Description>
-        <FileName>LUA/VassalageOverview.xml</FileName>
+        <FileName>LUA/VassalageOverview.lua</FileName>
       </Content>
     </ModContent>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="LUA\" />
+    <Folder Include="SQL\" />
+    <Folder Include="XML\" />
+    <Folder Include="XML\Gameplay\" />
+    <Folder Include="XML\Text\" />
+    <Folder Include="XML\Text\en_US\" />
+    <Folder Include="XML\Text\pl_PL\" />
+    <Folder Include="XML\Text\zn_Hant_HK" />
+    <Folder Include="XML\Text\zn_CN" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
     <OutputPath>.</OutputPath>
   </PropertyGroup>
@@ -150,10 +191,6 @@ I am coordinating with the Community Patch Project now. While this mod has it's 
   </PropertyGroup>
   <ItemGroup>
     <Content Include="CvGameCoreDLL_Expansion2.dll">
-      <SubType>Lua</SubType>
-      <ImportIntoVFS>True</ImportIntoVFS>
-    </Content>
-    <Content Include="CvGameCoreDLL_Expansion2.pdb">
       <SubType>Lua</SubType>
       <ImportIntoVFS>True</ImportIntoVFS>
     </Content>
@@ -285,6 +322,18 @@ I am coordinating with the Community Patch Project now. While this mod has it's 
       <SubType>Lua</SubType>
       <ImportIntoVFS>False</ImportIntoVFS>
     </Content>
+    <Content Include="XML\Text\pl_PL\pl_PL_Text_CivilopediaC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="XML\Text\pl_PL\pl_PL_Text_Generic_DiplomacyC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="XML\Text\pl_PL\pl_PL_Text_UIC4DF.xml">
+      <SubType>Lua</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
     <Content Include="XML\Text\zn_CN\zh_CN_Text_CivilopediaC4DF.xml">
       <SubType>Lua</SubType>
       <ImportIntoVFS>False</ImportIntoVFS>
@@ -309,17 +358,6 @@ I am coordinating with the Community Patch Project now. While this mod has it's 
       <SubType>Lua</SubType>
       <ImportIntoVFS>False</ImportIntoVFS>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-    <Folder Include="LUA\" />
-    <Folder Include="SQL\" />
-    <Folder Include="XML\" />
-    <Folder Include="XML\Gameplay\" />
-    <Folder Include="XML\Text\" />
-    <Folder Include="XML\Text\en_US\" />
-    <Folder Include="XML\Text\zn_Hant_HK" />
-    <Folder Include="XML\Text\zn_CN" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Firaxis\ModBuddy\Civ5Mod.targets" />
 </Project>

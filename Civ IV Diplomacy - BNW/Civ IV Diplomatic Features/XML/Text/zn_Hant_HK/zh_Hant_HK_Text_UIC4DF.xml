@@ -54,10 +54,10 @@
 			<Text>其他領袖無可供交易的科技。</Text>
 		</Row>
 		<Row Tag="TXT_KEY_DIPLO_TRADE_TECHNOLOGIES_NO_TECH_OTHER_PLAYER">
-			<Text>[NEWLINE][NEWLINE]他們沒有擁有銷售此物的科技（可替換部件）。</Text>
+			<Text>[NEWLINE][NEWLINE]他們沒有擁有銷售此物的科技（科學理論）。</Text>
 		</Row>
 		<Row Tag="TXT_KEY_DIPLO_TRADE_TECHNOLOGIES_NO_TECH_PLAYER">
-			<Text>[NEWLINE][NEWLINE]你們沒有擁有銷售此物的科技（可替換部件）。</Text>
+			<Text>[NEWLINE][NEWLINE]你們沒有擁有銷售此物的科技（科學理論）。</Text>
 		</Row>
 		<Row Tag="TXT_KEY_DIPLO_TRADE_TECHNOLOGIES_SCIENCE_OFF">
 			<Text>[NEWLINE][NEWLINE]此科技系統在此劇情中關閉。</Text>
