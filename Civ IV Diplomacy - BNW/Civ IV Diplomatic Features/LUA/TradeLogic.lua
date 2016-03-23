@@ -2127,7 +2127,6 @@ function ResetDisplay()
 		-- if bFoundTech is false, disable the button
 		Controls.UsPocketTechnology:SetDisabled( not bFoundTech )
 		
-		-- Didn't find an eligible tech? Cool!
 		if (bFoundTech) then
 			--print("Found tech!");
 			Controls.UsPocketTechnology:GetTextControl():SetColorByName("Beige_Black");
@@ -2151,8 +2150,8 @@ function ResetDisplay()
 			end
 			
 			-- No embassy?
-			if (not g_pUsTeam:HasEmbassyAtTeam(g_iThemTeam)) then
-				strTooltip = strTooltip .. " [COLOR_WARNING_TEXT]" .. Locale.ConvertTextKey("TXT_KEY_DIPLO_YOU_NEED_EMBASSY_TT" ) .. "[ENDCOLOR]";
+			if (not g_pUsTeam:HasEmbassyAtTeam(g_iThemTeam) or not g_pThemTeam:HasEmbassyAtTeam(g_iUsTeam)) then
+				strTooltip = strTooltip .. " [COLOR_WARNING_TEXT]" .. Locale.ConvertTextKey("TXT_KEY_DIPLO_BOTH_NEED_EMBASSY_TT" ) .. "[ENDCOLOR]";
 			end
 			
 			-- Display final tooltip
@@ -2213,8 +2212,8 @@ function ResetDisplay()
 			end
 			
 			-- No embassy?
-			if (not g_pThemTeam:HasEmbassyAtTeam(g_iUsTeam)) then
-				strTooltip = strTooltip .. " [COLOR_WARNING_TEXT]" .. Locale.ConvertTextKey("TXT_KEY_DIPLO_THEY_NEED_EMBASSY_TT" ) .. "[ENDCOLOR]";
+			if (not g_pUsTeam:HasEmbassyAtTeam(g_iThemTeam) or not g_pThemTeam:HasEmbassyAtTeam(g_iUsTeam)) then
+				strTooltip = strTooltip .. " [COLOR_WARNING_TEXT]" .. Locale.ConvertTextKey("TXT_KEY_DIPLO_BOTH_NEED_EMBASSY_TT" ) .. "[ENDCOLOR]";
 			end
 			
 			-- Display final tooltip
@@ -3688,10 +3687,10 @@ function OnChoosePocketVote(iFromPlayer, iVoteIndex)
 	if (pLeague ~= nil and g_LeagueVoteList[iVoteIndex] ~= nil) then
 		local iResolutionID = g_LeagueVoteList[iVoteIndex].ID;
 		local iVoteChoice = g_LeagueVoteList[iVoteIndex].VoteChoice;
-
+		local iNumVotes = pLeague:GetCoreVotesForMember(iFromPlayer);
 		local bRepeal = g_LeagueVoteList[iVoteIndex].Repeal;
-		print("==debug== Vote added to deal, ID=" .. iResolutionID .. ", VoteChoice=" .. iVoteChoice .. ", NumVotes=" .. iNumChooseVotes);
-		g_Deal:AddVoteCommitment(iFromPlayer, iResolutionID, iVoteChoice, iNumChooseVotes, bRepeal);
+		print("==debug== Vote added to deal, ID=" .. iResolutionID .. ", VoteChoice=" .. iVoteChoice .. ", NumVotes=" .. iNumVotes);
+		g_Deal:AddVoteCommitment(iFromPlayer, iResolutionID, iVoteChoice, iNumVotes, bRepeal);
 	    
 		DisplayDeal();
 		DoUIDealChangedByHuman();

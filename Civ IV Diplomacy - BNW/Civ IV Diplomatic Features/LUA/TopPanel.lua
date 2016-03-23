@@ -642,7 +642,7 @@ function GoldTipHandler( control )
 
 	-- Gold from Vassal Tax
 	if (iExpenseFromVassalTaxes > 0) then
-		strText = strText .. "[NEWLINE]  [ICON_BULLET]" .. Locale.ConvertTextKey("TXT_KEY_TOP_GOLD_VASSAL_TAX", iExpenseFromVassalTaxes);
+		strText = strText .. "[NEWLINE]  [ICON_BULLET]" .. Locale.ConvertTextKey("TXT_KEY_TP_GOLD_VASSAL_TAX", iExpenseFromVassalTaxes);
 	end
 --  END
 	strText = strText .. "[/COLOR]";
