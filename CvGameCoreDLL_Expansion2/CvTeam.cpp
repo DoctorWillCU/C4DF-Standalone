@@ -236,15 +236,6 @@ void CvTeam::uninit()
 	m_iTotalPopulationWhenVassalMade = 0;
 	m_eMaster = NO_TEAM;
 
-	FILogFile* pLog;
-	pLog = LOGFILEMGR.GetLog("CvTeam_master.txt", FILogFile::kDontTimeStamp);
-	
-	CvString str;
-	str.Format("%d", m_eMaster);
-	pLog->Msg(str);
-
-	OutputDebugString(str);
-
 	for(int i = 0; i < MAX_MAJOR_CIVS; i++)
 	{
 		m_aiNumTurnsSinceVassalTaxSet[i] = -1;
@@ -7585,9 +7576,6 @@ TeamTypes CvTeam::GetMaster() const
 // We're a vassal of somebody (doesn't matter who)
 bool CvTeam::IsVassalOfSomeone() const
 {
-	if(!isAlive())
-		return false;
-
 	return m_eMaster!=NO_TEAM;
 }
 //	--------------------------------------------------------------------------------
