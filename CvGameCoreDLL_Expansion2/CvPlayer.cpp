@@ -24918,7 +24918,7 @@ int CvPlayer::GetHappinessFromVassal(PlayerTypes ePlayer) const
 {
 	int iAmount = 0;
 
-	if(GET_TEAM(GET_PLAYER(ePlayer).getTeam()).IsVassal(getTeam()))
+	if(GET_TEAM(GET_PLAYER(ePlayer).getTeam()).GetMaster() == getTeam())
 	{
 		iAmount += GET_PLAYER(ePlayer).GetExcessHappiness() * GC.getVASSAL_HAPPINESS_PERCENT();
 		iAmount /= 100;

@@ -11,6 +11,7 @@ ALTER TABLE Technologies	ADD		VassalageTradingAllowed			boolean;									-- Enab
 ALTER TABLE Eras			ADD		VassalageEnabled				boolean;									-- Enables Vassalage (era)
 ALTER TABLE Resolutions		ADD		VassalMaintenanceGoldPercent	integer	DEFAULT	0;
 ALTER TABLE Resolutions		ADD		EndAllCurrentVassals			boolean	DEFAULT	0;
+ALTER TABLE Resolutions		ADD		EndVassalage					boolean DEFAULT 0;
 ---------------------------------------------------------------------------------------------
 -- GameSpeedsInfos
 

@@ -202,6 +202,7 @@ CvResolutionEffects::CvResolutionEffects(void)
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	iVassalMaintenanceGoldPercent = 0;
 	bEndAllCurrentVassals = false;
+	bEndVassalage = false;
 #endif
 }
 
@@ -240,6 +241,7 @@ CvResolutionEffects::CvResolutionEffects(ResolutionTypes eType)
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 		iVassalMaintenanceGoldPercent		= pInfo->GetVassalMaintenanceGoldPercent();
 		bEndAllCurrentVassals				= pInfo->IsEndAllCurrentVassals();
+		bEndVassalage						= pInfo->IsEndVassalage();
 #endif
 	}
 }
@@ -451,6 +453,7 @@ FDataStream& operator>>(FDataStream& loadFrom, CvResolutionEffects& writeTo)
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	loadFrom >> writeTo.iVassalMaintenanceGoldPercent;
 	loadFrom >> writeTo.bEndAllCurrentVassals;
+	loadFrom >> writeTo.bEndVassalage;
 #endif
 
 	return loadFrom;
@@ -490,6 +493,7 @@ FDataStream& operator<<(FDataStream& saveTo, const CvResolutionEffects& readFrom
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	saveTo << readFrom.iVassalMaintenanceGoldPercent;
 	saveTo << readFrom.bEndAllCurrentVassals;
+	saveTo << readFrom.bEndVassalage;
 #endif
 
 	return saveTo;
@@ -1360,6 +1364,12 @@ void CvActiveResolution::DoEffects(PlayerTypes ePlayer)
 				}
 			}
 		}
+	}
+	if (MOD_DIPLOMACY_CIV4_FEATURES && GetEffects()->bEndVassalage)
+	{
+		// End vassalage
+		TeamTypes eMaster = GET_TEAM(GET_PLAYER(eTargetPlayer).getTeam()).GetMaster();
+		GET_TEAM(eMaster).DoEndVassal(eMaster, true, true);
 	}
 #endif
 
@@ -2775,7 +2785,7 @@ bool CvLeague::IsResolutionEffectsValid(ResolutionTypes eResolution, int iPropos
 		}
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && (pInfo->GetVassalMaintenanceGoldPercent() != 0 || pInfo->IsEndAllCurrentVassals()))
+	if(MOD_DIPLOMACY_CIV4_FEATURES && (pInfo->GetVassalMaintenanceGoldPercent() != 0 || pInfo->IsEndAllCurrentVassals() || pInfo->IsEndVassalage()))
 	{
 		if(GC.getGame().isOption(GAMEOPTION_NO_VASSALAGE))
 		{
@@ -2789,18 +2799,51 @@ bool CvLeague::IsResolutionEffectsValid(ResolutionTypes eResolution, int iPropos
 		}
 		bool bValid = false;
 		PlayerTypes eLoopPlayer;
+		// Check if someone is a vassal
 		for (int iPlayerLoop = 0; iPlayerLoop < MAX_CIV_PLAYERS; iPlayerLoop++)
 		{
 			eLoopPlayer = (PlayerTypes) iPlayerLoop;
 			if((eLoopPlayer != NO_PLAYER) && GET_PLAYER(eLoopPlayer).isAlive() && !GET_PLAYER(eLoopPlayer).isMinorCiv())
 			{
-				if(GET_TEAM(GET_PLAYER(eLoopPlayer).getTeam()).GetNumVassals() > 0)
+				if(GET_TEAM(GET_PLAYER(eLoopPlayer).getTeam()).IsVassalOfSomeone())
 				{
 					bValid = true;
 					break;
 				}
 			}
 		}
+
+		// If we are liberating a particular vassal, check him in depth...
+		if(bValid && pInfo->IsEndVassalage())
+		{
+			PlayerTypes eTargetPlayer = (PlayerTypes) iProposerChoice;
+			CvAssert(eTargetPlayer >= 0 && eTargetPlayer < MAX_MAJOR_CIVS);
+			if (eTargetPlayer >= 0 && eTargetPlayer < MAX_MAJOR_CIVS)
+			{
+				if(!GET_PLAYER(eTargetPlayer).isAlive())
+				{
+					return false;
+				}
+
+				if(GET_PLAYER(eTargetPlayer).getNumCities() <= 0)
+				{
+					return false;
+				}
+
+				// Has to be a vassal
+				if(!GET_TEAM(GET_PLAYER(eTargetPlayer).getTeam()).IsVassalOfSomeone())
+				{
+					if (sTooltipSink != NULL)
+					{
+						(*sTooltipSink) += "[NEWLINE][NEWLINE][COLOR_WARNING_TEXT]";
+						(*sTooltipSink) += Localization::Lookup("TXT_KEY_LEAGUE_OVERVIEW_INVALID_RESOLUTION_NOT_VASSAL").toUTF8();
+						(*sTooltipSink) += "[ENDCOLOR]";
+					}
+					return false;
+				}
+			}
+		}
+
 		if(!bValid)
 		{
 			if (sTooltipSink != NULL)
@@ -9493,6 +9536,29 @@ int CvLeagueAI::ScoreVoteChoiceYesNo(CvProposal* pProposal, int iChoice, bool bE
 			}
 		}
 	}
+	// End Vassal - One Player
+	if(MOD_DIPLOMACY_CIV4_FEATURES && pProposal->GetEffects()->bEndVassalage)
+	{
+		//How does this affect us?
+		TeamTypes eTeam = GetPlayer()->getTeam();
+		CvTeam& kTeam = GET_TEAM(eTeam);
+		
+		// Do we have vassals?
+		if(kTeam.GetNumVassals() > 0)
+		{
+			iScore += (-1000 * kTeam.GetNumVassals());
+		}
+
+		// Are we the target?
+		TeamTypes eTarget = GET_PLAYER(eTargetPlayer).getTeam();
+		if(eTeam == eTarget)
+		{
+			// Base score of 400
+			iScore += 400;
+			
+			// TO-DO: implement
+		}
+	}
 #endif
 	// Scholars in Residence
 	if (pProposal->GetEffects()->iMemberDiscoveredTechMod != 0)
@@ -10698,6 +10764,7 @@ CvResolutionEntry::CvResolutionEntry(void)
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	m_iVassalMaintenanceGoldPercent		= 0;
 	m_bEndAllCurrentVassals				= false;
+	m_bEndVassalage						= false;
 #endif
 }
 
@@ -10749,6 +10816,7 @@ bool CvResolutionEntry::CacheResults(Database::Results& kResults, CvDatabaseUtil
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	m_iVassalMaintenanceGoldPercent		= kResults.GetInt("VassalMaintenanceGoldPercent");
 	m_bEndAllCurrentVassals				= kResults.GetBool("EndAllCurrentVassals");
+	m_bEndVassalage						= kResults.GetBool("EndVassalage");
 #endif
 
 	return true;
@@ -10927,6 +10995,10 @@ int CvResolutionEntry::GetVassalMaintenanceGoldPercent() const
 bool CvResolutionEntry::IsEndAllCurrentVassals() const
 {
 	return m_bEndAllCurrentVassals;
+}
+bool CvResolutionEntry::IsEndVassalage() const
+{
+	return m_bEndVassalage;
 }
 #endif
 

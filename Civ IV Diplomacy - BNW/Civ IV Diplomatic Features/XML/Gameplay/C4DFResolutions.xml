@@ -3,6 +3,15 @@
 <GameData>
 	<Resolutions>
 		<Row>
+			<Type>RESOLUTION_LIBERATE_ONE_VASSAL</Type>
+			<Description>TXT_KEY_RESOLUTION_LIBERATE_ONE_VASSAL</Description>
+			<Help>TXT_KEY_RESOLUTION_LIBERATE_ONE_VASSAL_HELP</Help>
+			<VoterDecision>RESOLUTION_DECISION_YES_OR_NO</VoterDecision>
+			<ProposerDecision>RESOLUTION_DECISION_OTHER_MAJOR_CIV_MEMBER</ProposerDecision>
+			<EndVassalage>true</EndVassalage>
+			<TechPrereqAnyMember>TECH_RADIO</TechPrereqAnyMember>
+		</Row>
+		<Row>
 			<Type>RESOLUTION_PLAYER_VASSAL_TAX</Type>
 			<Description>TXT_KEY_RESOLUTION_PLAYER_VASSAL_TAX</Description>
 			<Help>TXT_KEY_RESOLUTION_PLAYER_VASSAL_TAX_HELP</Help>

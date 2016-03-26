@@ -78,6 +78,9 @@
 		<Row Tag="TXT_KEY_LEAGUE_OVERVIEW_INVALID_RESOLUTION_NO_VASSALS">
 			<Text>Not allowed due to the absence of Vassals.</Text>
 		</Row>
+		<Row Tag="TXT_KEY_LEAGUE_OVERVIEW_INVALID_RESOLUTION_NOT_VASSAL">
+			<Text>This player is not a vassal and cannot be liberated.</Text>
+		</Row>
 		<!-- Opinion Weights -->
 		<Row Tag="TXT_KEY_DIPLO_WE_ARE_MASTER">
 			<Text>You are their vassal state, and they like it!</Text>
@@ -770,11 +773,20 @@
 		<Row Tag="TXT_KEY_RESOLUTION_PLAYER_VASSAL_TAX">
 			<Text>Global Liberation</Text>
 		</Row>
-		<Row Tag="TXT_KEY_RESOLUTION_PLAYER_VASSAL_TAX_HELP">
+		<Row Tag="TXT_KEY_RESOLUTION_LIBERATE_ONE_VASSAL_HELP">
 			<Text>All Master-Vassal relationships are immediately and peacefully annulled.</Text>
 		</Row>
 		<Row Tag="TXT_KEY_LEAGUE_OVERVIEW_EFFECT_SUMMARY_VASSAL_MAINTENANCE">
 			<Text>+{1_VassalMaintenancePercent}% [ICON_GOLD] Gold cost for Vassal Unit/City Maintenance</Text>
+		</Row>
+
+
+		<!-- End One Vassal -->
+		<Row Tag="TXT_KEY_RESOLUTION_LIBERATE_ONE_VASSAL">
+			<Text>End Vassalage</Text>
+		</Row>
+		<Row Tag="TXT_KEY_RESOLUTION_PLAYER_VASSAL_TAX_HELP">
+			<Text>Peacefully end the Master-Vassal relationship between selected player.</Text>
 		</Row>
 
 		<Row Tag="TXT_KEY_TP_HAPPINESS_VASSALS">
