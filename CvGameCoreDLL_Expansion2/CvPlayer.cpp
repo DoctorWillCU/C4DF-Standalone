@@ -24907,7 +24907,10 @@ int CvPlayer::GetHappinessFromVassals() const
 	for(int iPlayerLoop = 0; iPlayerLoop < MAX_MAJOR_CIVS; iPlayerLoop++)
 	{
 		ePlayer = (PlayerTypes) iPlayerLoop;
-		iHappiness += GetHappinessFromVassal(ePlayer);
+		if(GetID() != ePlayer && GET_PLAYER(ePlayer).isAlive())
+		{
+			iHappiness += GetHappinessFromVassal(ePlayer);
+		}
 	}
 
 	return iHappiness;

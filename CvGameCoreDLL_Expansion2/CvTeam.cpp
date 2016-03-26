@@ -236,6 +236,15 @@ void CvTeam::uninit()
 	m_iTotalPopulationWhenVassalMade = 0;
 	m_eMaster = NO_TEAM;
 
+	FILogFile* pLog;
+	pLog = LOGFILEMGR.GetLog("CvTeam_master.txt", FILogFile::kDontTimeStamp);
+	
+	CvString str;
+	str.Format("%d", m_eMaster);
+	pLog->Msg(str);
+
+	OutputDebugString(str);
+
 	for(int i = 0; i < MAX_MAJOR_CIVS; i++)
 	{
 		m_aiNumTurnsSinceVassalTaxSet[i] = -1;
@@ -7570,9 +7579,6 @@ void CvTeam::changeVassalageTradingAllowedCount(int iChange)
 // Find out who we're a vassal of
 TeamTypes CvTeam::GetMaster() const
 {
-	if(!isAlive())
-		return NO_TEAM;
-
 	return m_eMaster;
 }
 //	--------------------------------------------------------------------------------
@@ -7593,9 +7599,6 @@ bool CvTeam::IsVoluntaryVassal(TeamTypes eIndex) const
 // Are we a vassal of eIndex?
 bool CvTeam::IsVassal(TeamTypes eIndex) const
 {
-	if(!isAlive() || !GET_TEAM(eIndex).isAlive())
-		return false;
-
 	return eIndex!=NO_TEAM && eIndex==m_eMaster;
 }
 //	--------------------------------------------------------------------------------
