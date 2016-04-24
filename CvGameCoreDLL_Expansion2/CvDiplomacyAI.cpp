@@ -5475,7 +5475,7 @@ void CvDiplomacyAI::DoMakePeaceWithMinors()
 				if(IsAtWar(eLoopPlayer))
 				{
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-					if(MOD_DIPLOMACY_CIV4_FEATURES && !GET_TEAM(GetPlayer()->getTeam()).IsVassalLockedIntoWar(GET_PLAYER(eLoopPlayer).getTeam()))	// Locked into war for a period of time? (coop war, war deal, etc.)
+					if(!GET_TEAM(GetPlayer()->getTeam()).IsVassalLockedIntoWar(GET_PLAYER(eLoopPlayer).getTeam()))	// Locked into war for a period of time? (coop war, war deal, etc.)
 					{
 						if(IsWantsPeaceWithPlayer(eLoopPlayer) && GET_TEAM(GetPlayer()->getTeam()).GetNumTurnsLockedIntoWar(GET_PLAYER(eLoopPlayer).getTeam()) <= 0)	// Locked into war for a period of time? (coop war, war deal, etc.)
 						{
@@ -5488,7 +5488,7 @@ void CvDiplomacyAI::DoMakePeaceWithMinors()
 					}
 					else
 #else
-					if(!MOD_DIPLOMACY_CIV4_FEATURES && IsWantsPeaceWithPlayer(eLoopPlayer) && GET_TEAM(GetPlayer()->getTeam()).GetNumTurnsLockedIntoWar(GET_PLAYER(eLoopPlayer).getTeam()) == 0)	// Locked into war for a period of time? (coop war, war deal, etc.)
+					if(IsWantsPeaceWithPlayer(eLoopPlayer) && GET_TEAM(GetPlayer()->getTeam()).GetNumTurnsLockedIntoWar(GET_PLAYER(eLoopPlayer).getTeam()) == 0)	// Locked into war for a period of time? (coop war, war deal, etc.)
 #endif
 					{
 						if(!GET_PLAYER(eLoopPlayer).GetMinorCivAI()->IsPeaceBlocked(GetPlayer()->getTeam()))
@@ -5918,7 +5918,7 @@ void CvDiplomacyAI::DoMakeWarOnPlayer(PlayerTypes eTargetPlayer)
 		bWantToAttack = (eApproach == MAJOR_CIV_APPROACH_WAR || (eApproach == MAJOR_CIV_APPROACH_DECEPTIVE && IsGoingForWorldConquest()));
 		bWantToAttack = bWantToAttack && !bAtWarWithAtLeastOneMajor; // let's not get into another war right now
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-		if(MOD_DIPLOMACY_CIV4_FEATURES && bWantToAttack)
+		if(bWantToAttack)
 		{
 			if(IsPlayerMoveTroopsRequestAccepted(eTargetPlayer))
 			{
@@ -7241,7 +7241,7 @@ void CvDiplomacyAI::DoUpdateOnePlayerTargetValue(PlayerTypes ePlayer)
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// Factor in player's Masters if he has any
-	if(MOD_DIPLOMACY_CIV4_FEATURES && !GET_PLAYER(ePlayer).isMinorCiv())
+	if(!GET_PLAYER(ePlayer).isMinorCiv())
 	{
 		for(int iMajorLoop = 0; iMajorLoop < MAX_MAJOR_CIVS; iMajorLoop++)
 		{
@@ -12018,7 +12018,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 		}
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_MAPS_OFFER)
+	else if(eStatement == DIPLO_STATEMENT_MAPS_OFFER)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12034,7 +12034,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 			GC.getGame().GetGameDeals()->FinalizeDeal(GetPlayer()->GetID(), ePlayer, true);
 		}
 	}
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_TECH_OFFER)
+	else if(eStatement == DIPLO_STATEMENT_TECH_OFFER)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12051,7 +12051,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 		}
 	}
 	// We're making a generous offer to Player
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_GENEROUS_OFFER)
+	else if(eStatement == DIPLO_STATEMENT_GENEROUS_OFFER)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12067,7 +12067,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 			GC.getGame().GetGameDeals()->FinalizeDeal(GetPlayer()->GetID(), ePlayer, true);
 		}
 	}
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_REVOKE_VASSALAGE)
+	else if(eStatement == DIPLO_STATEMENT_REVOKE_VASSALAGE)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12112,7 +12112,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 			GET_TEAM(kVassalPlayer.getTeam()).DoEndVassal(kMasterPlayer.getTeam(), bPeaceful, false);
 		}
 	}
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_REVOKE_VASSALAGE_THIRD_PARTY)
+	else if(eStatement == DIPLO_STATEMENT_REVOKE_VASSALAGE_THIRD_PARTY)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12129,7 +12129,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 		}
 	}
 	// AI offers ePlayer to be his vassal
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_BECOME_MY_VASSAL)
+	else if(eStatement == DIPLO_STATEMENT_BECOME_MY_VASSAL)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12144,7 +12144,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 			GC.getGame().GetGameDeals()->FinalizeDeal(GetPlayer()->GetID(), ePlayer, true);
 		}
 	}
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_LIBERATE_VASSAL)
+	else if(eStatement == DIPLO_STATEMENT_LIBERATE_VASSAL)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12156,7 +12156,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 		GET_TEAM(GetPlayer()->getTeam()).DoLiberateVassal(GET_PLAYER(ePlayer).getTeam());
 	}
 	// AI is upset that their taxes were raised
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_VASSAL_TAXES_RAISED_HUMAN_MASTER)
+	else if(eStatement == DIPLO_STATEMENT_VASSAL_TAXES_RAISED_HUMAN_MASTER)
 	{
 		// Active human
 		if(bShouldShowLeaderScene)
@@ -12170,7 +12170,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 		}
 	}
 	// AI is happy that their taxes were lowered
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_VASSAL_TAXES_LOWERED_HUMAN_MASTER)
+	else if(eStatement == DIPLO_STATEMENT_VASSAL_TAXES_LOWERED_HUMAN_MASTER)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12183,7 +12183,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 		}
 	}
 	// AI notifies human that taxes were raised
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_VASSAL_TAXES_RAISED_AI_MASTER)
+	else if(eStatement == DIPLO_STATEMENT_VASSAL_TAXES_RAISED_AI_MASTER)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -12196,7 +12196,7 @@ void CvDiplomacyAI::DoSendStatementToPlayer(PlayerTypes ePlayer, DiploStatementT
 		}
 	}
 	// AI notifies human that taxes were LOWERED
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eStatement == DIPLO_STATEMENT_VASSAL_TAXES_LOWERED_AI_MASTER)
+	else if(eStatement == DIPLO_STATEMENT_VASSAL_TAXES_LOWERED_AI_MASTER)
 	{
 		if(bShouldShowLeaderScene)
 		{
@@ -14703,7 +14703,7 @@ void CvDiplomacyAI::DoRequest(PlayerTypes ePlayer, DiploStatementTypes& eStateme
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 		        GetNumTurnsSinceStatementSent(ePlayer, DIPLO_STATEMENT_REQUEST_RANDFAILED) >= 15 &&
 				// If we just sent out a generous offer, don't ask for a request until some time has passed
-				(MOD_DIPLOMACY_CIV4_FEATURES && GetNumTurnsSinceStatementSent(ePlayer, DIPLO_STATEMENT_GENEROUS_OFFER) >= 25))
+				(GetNumTurnsSinceStatementSent(ePlayer, DIPLO_STATEMENT_GENEROUS_OFFER) >= 25))
 #else
 		        GetNumTurnsSinceStatementSent(ePlayer, DIPLO_STATEMENT_REQUEST_RANDFAILED) >= 15)
 #endif
@@ -16761,7 +16761,7 @@ const char* CvDiplomacyAI::GetDiploStringForMessage(DiploMessageTypes eDiploMess
 		// AI accepts a reasonable trade offer
 	case DIPLO_MESSAGE_TRADE_ACCEPT_ACCEPTABLE:
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-		if(MOD_DIPLOMACY_CIV4_FEATURES && IsOfferedGift(eForPlayer))
+		if(IsOfferedGift(eForPlayer))
 		{
 			SetOfferedGift(eForPlayer, false);
 			SetOfferingGift(eForPlayer, false);
@@ -17430,7 +17430,7 @@ void CvDiplomacyAI::DoFromUIDiploEvent(PlayerTypes eFromPlayer, FromUIDiploEvent
 	{
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 		// Changed some logic around so player can see the special declared war on vassal logic
-		if(!(MOD_DIPLOMACY_CIV4_FEATURES && IsVassal(eFromPlayer)))
+		if(!IsVassal(eFromPlayer))
 		{
 #endif
 		GET_TEAM(eFromTeam).declareWar(GetTeam());
@@ -17443,7 +17443,7 @@ void CvDiplomacyAI::DoFromUIDiploEvent(PlayerTypes eFromPlayer, FromUIDiploEvent
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 		}
-		if(MOD_DIPLOMACY_CIV4_FEATURES && IsVassal(eFromPlayer))
+		if(IsVassal(eFromPlayer))
 		{
 			GET_TEAM(eFromTeam).declareWar(GetTeam());
 		}
@@ -19437,7 +19437,7 @@ const char* CvDiplomacyAI::GetAttackedByHumanMessage()
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// Player broke our vassal agreement (declared war on vassal)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && IsPlayerBrokenVassalAgreement(ePlayer))
+	if(IsPlayerBrokenVassalAgreement(ePlayer))
 		return GetDiploStringForMessage(DIPLO_MESSAGE_VASSALAGE_ATTACKED_VASSAL);
 #endif
 
@@ -19669,7 +19669,7 @@ bool CvDiplomacyAI::DoTestCoopWarDesire(PlayerTypes ePlayer, PlayerTypes& eChose
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 		// Can't declare war against a vassal
-		if(MOD_DIPLOMACY_CIV4_FEATURES && IsVassal(eTargetPlayerLoop))
+		if(IsVassal(eTargetPlayerLoop))
 			continue;
 #endif
 
@@ -19757,7 +19757,7 @@ int CvDiplomacyAI::GetCoopWarScore(PlayerTypes ePlayer, PlayerTypes eTargetPlaye
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// We agreed not to attack, don't be dumb.
-	if(MOD_DIPLOMACY_CIV4_FEATURES && IsPlayerMoveTroopsRequestAccepted(eTargetPlayer))
+	if(IsPlayerMoveTroopsRequestAccepted(eTargetPlayer))
 		return 0;
 #endif
 
@@ -20001,7 +20001,7 @@ bool CvDiplomacyAI::IsContinueCoopWar(PlayerTypes ePlayer, PlayerTypes eTargetPl
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// If we've made the decision to move troops from borders, we're done
-	if(MOD_DIPLOMACY_CIV4_FEATURES && IsPlayerMoveTroopsRequestAccepted(eTargetPlayer))
+	if(IsPlayerMoveTroopsRequestAccepted(eTargetPlayer))
 		return false;
 #endif
 
@@ -20753,11 +20753,11 @@ bool CvDiplomacyAI::IsDenounceFriendAcceptable(PlayerTypes ePlayer)
 
 	int iChance = 0;
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && GET_TEAM(GET_PLAYER(ePlayer).getTeam()).IsVassal(m_pPlayer->getTeam()))
+	if(GET_TEAM(GET_PLAYER(ePlayer).getTeam()).IsVassal(m_pPlayer->getTeam()))
 	{
 		return false;
 	}
-	if(MOD_DIPLOMACY_CIV4_FEATURES && GET_TEAM(m_pPlayer->getTeam()).IsVassal(GET_PLAYER(ePlayer).getTeam()))
+	if(GET_TEAM(m_pPlayer->getTeam()).IsVassal(GET_PLAYER(ePlayer).getTeam()))
 	{
 		return false;
 	}

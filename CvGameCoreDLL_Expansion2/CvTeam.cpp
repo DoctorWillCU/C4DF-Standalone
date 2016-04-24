@@ -1072,7 +1072,7 @@ bool CvTeam::canChangeWarPeace(TeamTypes eTeam) const
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// Vassals have no control over war/peace
-	if(MOD_DIPLOMACY_CIV4_FEATURES && IsVassalOfSomeone())
+	if(IsVassalOfSomeone())
 	{
 		return false;
 	}
@@ -1124,7 +1124,7 @@ bool CvTeam::canDeclareWar(TeamTypes eTeam) const
 		return false;
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && GET_TEAM(eTeam).IsVassalOfSomeone() && (GET_TEAM(eTeam).GetMaster() != GetID()))
+	if(GET_TEAM(eTeam).IsVassalOfSomeone() && GET_TEAM(eTeam).GetMaster() != GetID())
 	{
 		return false;
 	}
@@ -1201,7 +1201,7 @@ void CvTeam::DoDeclareWar(TeamTypes eTeam, bool bDefensivePact, bool bMinorAllyP
 		GC.getGame().GetGameTrade()->CancelTradeBetweenTeams(m_eID, eTeam);
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-		if (!bDefensivePact || (MOD_DIPLOMACY_CIV4_FEATURES && !bVassal))
+		if (!bDefensivePact || (!bVassal))
 #else
 		if (!bDefensivePact)
 #endif
@@ -4088,7 +4088,7 @@ bool CvTeam::IsAllowsOpenBordersToTeam(TeamTypes eIndex) const
 	}
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && GetMaster() == eIndex)
+	if(GetMaster() == eIndex)
 	{
 		return true;
 	}
@@ -5729,7 +5729,7 @@ void CvTeam::setHasTech(TechTypes eIndex, bool bNewValue, PlayerTypes ePlayer, b
 			}
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-			if(MOD_DIPLOMACY_CIV4_FEATURES && GC.getGame().isOption(GAMEOPTION_NO_TECH_BROKERING))
+			if(GC.getGame().isOption(GAMEOPTION_NO_TECH_BROKERING))
 			{
 				SetTradeTech(eIndex, true);
 			}
@@ -6351,7 +6351,7 @@ void CvTeam::processTech(TechTypes eTech, int iChange)
 	}
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && pTech->IsVassalageTradingAllowed())
+	if(pTech->IsVassalageTradingAllowed())
 	{
 		changeVassalageTradingAllowedCount(iChange);
 	}
@@ -6937,7 +6937,7 @@ void CvTeam::SetCurrentEra(EraTypes eNewValue)
 			}
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-			if(MOD_DIPLOMACY_CIV4_FEATURES && pEraInfo->getVassalageEnabled())
+			if(pEraInfo->getVassalageEnabled())
 			{
 				if(!GC.getGame().isOption(GAMEOPTION_NO_VASSALAGE))
 				{
@@ -7602,39 +7602,43 @@ void CvTeam::setVassal(TeamTypes eIndex, bool bNewValue, bool bVoluntary)
 
 //	-----------------------------------------------------------------------------------------------
 // Can we end our vassalage with eTeam?
-bool CvTeam::canEndAllVassal() const
+bool CvTeam::canEndAllVassal()
 {
+	if (GetNumVassals() <= 0)
+		return false;
+
+	if (IsVassalOfSomeone())
+		return false;
+
 	TeamTypes eLoopTeam;
 	
 	int iMinTurns;
-	bool bValid = true;
 	// Go through every major.
 	for(int iTeamLoop=0; iTeamLoop < MAX_TEAMS; iTeamLoop++)
 	{
 		eLoopTeam = (TeamTypes) iTeamLoop;
 
-		// Ignore minors.
-		if(!GET_TEAM(eLoopTeam).isMinorCiv())
-		{
-			// Is eLoopTeam the vassal of us?
-			if(GET_TEAM(eLoopTeam).IsVassal(GetID()))
-			{
-				if(GET_TEAM(eLoopTeam).isAlive())
-				{
-					// Too soon to end our vassalage with ePlayer
-					iMinTurns = GET_TEAM(eLoopTeam).IsVoluntaryVassal(GetID()) ? /*10*/ GC.getGame().getGameSpeedInfo().getMinimumVoluntaryVassalTurns() : /*50*/ GC.getGame().getGameSpeedInfo().getMinimumVassalTurns();
+		if (!GET_TEAM(eLoopTeam).isAlive())
+			continue;
 
-					if(GetNumTurnsIsVassal() < iMinTurns)
-					{
-						bValid = false;
-						break;
-					}
-				}
-			}
+		// Ignore minors.
+		if (GET_TEAM(eLoopTeam).isMinorCiv())
+			continue;
+
+		// Is eLoopTeam our vassal?
+		if (!GET_TEAM(eLoopTeam).IsVassal(GetID()))
+			continue;
+				
+		// Too soon to end our vassalage with ePlayer
+		iMinTurns = GET_TEAM(eLoopTeam).IsVoluntaryVassal(GetID()) ? /*10*/ GC.getGame().getGameSpeedInfo().getMinimumVoluntaryVassalTurns() : /*50*/ GC.getGame().getGameSpeedInfo().getMinimumVassalTurns();
+
+		if(GetNumTurnsIsVassal() < iMinTurns)
+		{
+			return false;
 		}
 	}
 
-	return bValid;
+	return true;
 }
 bool CvTeam::canEndVassal(TeamTypes eTeam) const
 {

@@ -360,7 +360,7 @@ bool CvDeal::IsPossibleToTradeItem(PlayerTypes ePlayer, PlayerTypes eToPlayer, T
 	}
 	// Map
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	else if(!MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_MAPS)
+	else if(false)	// disabling this block of code - intentional!
 #else
 	else if(eItem == TRADE_ITEM_MAPS)
 #endif
@@ -567,7 +567,7 @@ bool CvDeal::IsPossibleToTradeItem(PlayerTypes ePlayer, PlayerTypes eToPlayer, T
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 		// Research agreements aren't enabled
-		if(MOD_DIPLOMACY_CIV4_FEATURES && !GC.getGame().isOption(GAMEOPTION_RESEARCH_AGREEMENTS))
+		if(!GC.getGame().isOption(GAMEOPTION_RESEARCH_AGREEMENTS))
 			return false;
 #endif
 
@@ -818,7 +818,7 @@ bool CvDeal::IsPossibleToTradeItem(PlayerTypes ePlayer, PlayerTypes eToPlayer, T
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// Maps
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_MAPS)
+	else if(eItem == TRADE_ITEM_MAPS)
 	{
 		// We don't have the tech for Map Trading yet
 		if(!pFromTeam->isMapTrading())
@@ -835,7 +835,7 @@ bool CvDeal::IsPossibleToTradeItem(PlayerTypes ePlayer, PlayerTypes eToPlayer, T
 			return false;
 	}
 	// Techs
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_TECHS)
+	else if(eItem == TRADE_ITEM_TECHS)
 	{
 		// Do we have no science enabled?
 		if(GC.getGame().isOption(GAMEOPTION_NO_SCIENCE))
@@ -882,7 +882,7 @@ bool CvDeal::IsPossibleToTradeItem(PlayerTypes ePlayer, PlayerTypes eToPlayer, T
 		if (!bFinalizing && IsTechTrade( ePlayer, (TechTypes) iData1))
 			return false;
 	}
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_VASSALAGE)
+	else if(eItem == TRADE_ITEM_VASSALAGE)
 	{
 		// Vassalage is disabled...
 		if(GC.getGame().isOption(GAMEOPTION_NO_VASSALAGE))
@@ -904,13 +904,8 @@ bool CvDeal::IsPossibleToTradeItem(PlayerTypes ePlayer, PlayerTypes eToPlayer, T
 		if(pFromTeam->GetNumVassals() > 0)
 			return false;
 
-		//If the other player is our master, or vice versa...
-		if(GET_TEAM(pToPlayer->getTeam()).IsVassal(pFromPlayer->getTeam()))
-		{
-			return false;
-		}
-
-		if(GET_TEAM(pFromPlayer->getTeam()).IsVassal(pToPlayer->getTeam()))
+		// If either team is a vassal of the other, we cannot end vassals
+		if (pToTeam->IsVassal(eFromTeam) || pFromTeam->IsVassal(eToTeam))
 		{
 			return false;
 		}
@@ -919,11 +914,15 @@ bool CvDeal::IsPossibleToTradeItem(PlayerTypes ePlayer, PlayerTypes eToPlayer, T
 		if (!bFinalizing && IsVassalageTrade( ePlayer))
 			return false;
 
+		// Must be able to end all vassals
+		if (!pFromTeam->canEndAllVassal())
+			return false;
+
 		//Can't already be offering this
 		if (!bFinalizing && IsRevokeVassalageTrade( ePlayer))
 			return false;
 	}
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_VASSALAGE_REVOKE)
+	else if(eItem == TRADE_ITEM_VASSALAGE_REVOKE)
 	{
 		// Vassalage is disabled...
 		if(GC.getGame().isOption(GAMEOPTION_NO_VASSALAGE))
@@ -2561,12 +2560,12 @@ bool CvGameDeals::FinalizeDeal(PlayerTypes eFromPlayer, PlayerTypes eToPlayer, b
 				}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 				// Maps
-				else if (MOD_DIPLOMACY_CIV4_FEATURES && it->m_eItemType == TRADE_ITEM_MAPS)
+				else if (it->m_eItemType == TRADE_ITEM_MAPS)
 				{
 					GET_TEAM(eToTeam).AcquireMap(eFromTeam);
 				}
 				// Techs
-				else if(MOD_DIPLOMACY_CIV4_FEATURES && it->m_eItemType == TRADE_ITEM_TECHS)
+				else if(it->m_eItemType == TRADE_ITEM_TECHS)
 				{
 					TechTypes eTech = (TechTypes) it->m_iData1;
 
@@ -2579,13 +2578,13 @@ bool CvGameDeals::FinalizeDeal(PlayerTypes eFromPlayer, PlayerTypes eToPlayer, b
 					}
 				}
 				// Vassalage
-				else if(MOD_DIPLOMACY_CIV4_FEATURES && it->m_eItemType == TRADE_ITEM_VASSALAGE)
+				else if(it->m_eItemType == TRADE_ITEM_VASSALAGE)
 				{
 					bool bCapitulation = kDeal.IsPeaceTreatyTrade(eFromPlayer) || kDeal.IsPeaceTreatyTrade(eToPlayer);
 					GET_TEAM(eFromTeam).DoBecomeVassal(eToTeam, !bCapitulation);
 				}
 				// Revoke Vassalage
-				else if(MOD_DIPLOMACY_CIV4_FEATURES && it->m_eItemType == TRADE_ITEM_VASSALAGE_REVOKE)
+				else if(it->m_eItemType == TRADE_ITEM_VASSALAGE_REVOKE)
 				{
 					PlayerTypes eLoopPlayer;
 					TeamTypes eLoopTeam;

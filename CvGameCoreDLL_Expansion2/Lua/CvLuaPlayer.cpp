@@ -9597,7 +9597,7 @@ int CvLuaPlayer::lGetOpinionTable(lua_State* L)
 	}
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if (iVisibleApproach != MAJOR_CIV_APPROACH_FRIENDLY || (MOD_DIPLOMACY_CIV4_FEATURES && GC.getGame().isOption(GAMEOPTION_ADVANCED_DIPLOMACY))) 
+	if (iVisibleApproach != MAJOR_CIV_APPROACH_FRIENDLY || GC.getGame().isOption(GAMEOPTION_ADVANCED_DIPLOMACY)) 
 #else
 	if (iVisibleApproach != MAJOR_CIV_APPROACH_FRIENDLY) 
 #endif
@@ -10519,7 +10519,7 @@ int CvLuaPlayer::lGetOpinionTable(lua_State* L)
 			strOutput.insert(0, strFullPositiveColor);
 		}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-		if(MOD_DIPLOMACY_CIV4_FEATURES && GC.getGame().isOption(GAMEOPTION_ADVANCED_DIPLOMACY))
+		if(GC.getGame().isOption(GAMEOPTION_ADVANCED_DIPLOMACY))
 		{
 			CvString strTemp;
 			// Reverse the value of the opinion so as to not confuse players

@@ -308,7 +308,7 @@ bool CvResolutionEffects::HasOngoingEffects() const
 		return true;
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if (MOD_DIPLOMACY_CIV4_FEATURES && iVassalMaintenanceGoldPercent != 0)
+	if (iVassalMaintenanceGoldPercent != 0)
 		return true;
 #endif
 
@@ -1345,7 +1345,7 @@ void CvActiveResolution::DoEffects(PlayerTypes ePlayer)
 	}
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if (MOD_DIPLOMACY_CIV4_FEATURES && GetEffects()->bEndAllCurrentVassals)
+	if (GetEffects()->bEndAllCurrentVassals)
 	{
 		TeamTypes eTeam = pPlayer->getTeam();
 		if(eTeam != NO_TEAM && GET_TEAM(eTeam).GetNumVassals() > 0)
@@ -1394,7 +1394,7 @@ void CvActiveResolution::DoEffects(PlayerTypes ePlayer)
 		pPlayer->ChangeUnitGoldMaintenanceMod(GetEffects()->iUnitMaintenanceGoldPercent);
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if (MOD_DIPLOMACY_CIV4_FEATURES && GetEffects()->iVassalMaintenanceGoldPercent != 0)
+	if (GetEffects()->iVassalMaintenanceGoldPercent != 0)
 	{
 		pPlayer->ChangeVassalGoldMaintenanceMod(GetEffects()->iVassalMaintenanceGoldPercent);
 	}
@@ -1578,7 +1578,7 @@ void CvActiveResolution::RemoveEffects(PlayerTypes ePlayer)
 		pPlayer->ChangeUnitGoldMaintenanceMod(-1 * GetEffects()->iUnitMaintenanceGoldPercent);
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if (MOD_DIPLOMACY_CIV4_FEATURES && GetEffects()->iVassalMaintenanceGoldPercent != 0)
+	if (GetEffects()->iVassalMaintenanceGoldPercent != 0)
 	{
 		pPlayer->ChangeVassalGoldMaintenanceMod(-1 * GetEffects()->iVassalMaintenanceGoldPercent);
 	}
@@ -2775,7 +2775,7 @@ bool CvLeague::IsResolutionEffectsValid(ResolutionTypes eResolution, int iPropos
 		}
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && (pInfo->GetVassalMaintenanceGoldPercent() != 0 || pInfo->IsEndAllCurrentVassals()))
+	if(pInfo->GetVassalMaintenanceGoldPercent() != 0 || pInfo->IsEndAllCurrentVassals())
 	{
 		if(GC.getGame().isOption(GAMEOPTION_NO_VASSALAGE))
 		{
@@ -9283,7 +9283,7 @@ int CvLeagueAI::ScoreVoteChoiceYesNo(CvProposal* pProposal, int iChoice, bool bE
 		}
 	}
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if (MOD_DIPLOMACY_CIV4_FEATURES && pProposal->GetEffects()->iVassalMaintenanceGoldPercent != 0)
+	if (pProposal->GetEffects()->iVassalMaintenanceGoldPercent != 0)
 	{
 		int iFactor = (pProposal->GetEffects()->iVassalMaintenanceGoldPercent > 0) ? 1 : -1;
 		
@@ -9334,7 +9334,7 @@ int CvLeagueAI::ScoreVoteChoiceYesNo(CvProposal* pProposal, int iChoice, bool bE
 		}
 	}
 	//End Vassalage
-	if (MOD_DIPLOMACY_CIV4_FEATURES && pProposal->GetEffects()->bEndAllCurrentVassals)
+	if (pProposal->GetEffects()->bEndAllCurrentVassals)
 	{
 		//How does this affect us?
 		TeamTypes eTeam = GetPlayer()->getTeam();

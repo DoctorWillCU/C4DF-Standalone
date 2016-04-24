@@ -6096,7 +6096,7 @@ void CvCity::processBuilding(BuildingTypes eBuilding, int iChange, bool bFirst, 
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 			// Research agreements are not active, therefore this building now increases science yield by 25%
-			if(MOD_DIPLOMACY_CIV4_FEATURES && !GC.getGame().isOption(GAMEOPTION_RESEARCH_AGREEMENTS))
+			if(!GC.getGame().isOption(GAMEOPTION_RESEARCH_AGREEMENTS))
 			{
 				if(pBuildingInfo->GetMedianTechPercentChange() > 0)
 				{

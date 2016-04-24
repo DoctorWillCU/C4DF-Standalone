@@ -244,7 +244,7 @@ void CvDealAI::DoAcceptedDeal(PlayerTypes eFromPlayer, const CvDeal& kDeal, int 
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 		// We're offering help to a player
-		if (MOD_DIPLOMACY_CIV4_FEATURES && (GetPlayer()->GetDiplomacyAI()->IsOfferingGift(eFromPlayer) || GetPlayer()->GetDiplomacyAI()->IsOfferedGift(eFromPlayer)))
+		if (GetPlayer()->GetDiplomacyAI()->IsOfferingGift(eFromPlayer) || GetPlayer()->GetDiplomacyAI()->IsOfferedGift(eFromPlayer))
 		{
 			//End the gift exchange after this.
 			GetPlayer()->GetDiplomacyAI()->SetOfferingGift(eFromPlayer, false);
@@ -305,7 +305,7 @@ DemandResponseTypes CvDealAI::DoHumanDemand(CvDeal* pDeal)
 	
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// If we're friends with the demanding player, it's actually a Request for Help. Let's evaluate in a separate function and come back here
-	if(MOD_DIPLOMACY_CIV4_FEATURES && pDiploAI->IsDoFAccepted(eFromPlayer))
+	if(pDiploAI->IsDoFAccepted(eFromPlayer))
 	{
 		eResponse = GetRequestForHelpResponse(pDeal);
 	}
@@ -503,7 +503,7 @@ DemandResponseTypes CvDealAI::DoHumanDemand(CvDeal* pDeal)
 
 	// Have to sent AI response through the network  - it affects AI behavior
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && pDiploAI->IsDoFAccepted(eFromPlayer))
+	if(pDiploAI->IsDoFAccepted(eFromPlayer))
 	{
 		GC.getGame().DoFromUIDiploEvent(FROM_UI_DIPLO_EVENT_HUMAN_REQUEST, eMyPlayer, /*iData1*/ eResponse, -1);
 	}
@@ -517,7 +517,7 @@ DemandResponseTypes CvDealAI::DoHumanDemand(CvDeal* pDeal)
 
 	// Demand agreed to
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(eResponse == DEMAND_RESPONSE_ACCEPT || (MOD_DIPLOMACY_CIV4_FEATURES && eResponse == DEMAND_RESPONSE_GIFT_ACCEPT))
+	if(eResponse == DEMAND_RESPONSE_ACCEPT || eResponse == DEMAND_RESPONSE_GIFT_ACCEPT)
 #else
 	if(eResponse == DEMAND_RESPONSE_ACCEPT)
 #endif
@@ -568,7 +568,7 @@ bool CvDealAI::IsDealWithHumanAcceptable(CvDeal* pDeal, PlayerTypes eOtherPlayer
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	// We're offering help to a player
-	if (MOD_DIPLOMACY_CIV4_FEATURES && GetPlayer()->GetDiplomacyAI()->IsOfferingGift(eOtherPlayer))
+	if (GetPlayer()->GetDiplomacyAI()->IsOfferingGift(eOtherPlayer))
 	{
 		return true;
 	}
@@ -969,13 +969,13 @@ int CvDealAI::GetTradeItemValue(TradeableItems eItem, bool bFromMe, PlayerTypes 
 	else if(eItem == TRADE_ITEM_VOTE_COMMITMENT)
 		iItemValue = GetVoteCommitmentValue(bFromMe, eOtherPlayer, iData1, iData2, iData3, bFlag1, bUseEvenValue);
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_MAPS)
+	else if(eItem == TRADE_ITEM_MAPS)
 		iItemValue = GetMapValue(bFromMe, eOtherPlayer, bUseEvenValue);
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_TECHS)
+	else if(eItem == TRADE_ITEM_TECHS)
 		iItemValue = GetTechValue(/*TechType*/ (TechTypes) iData1, bFromMe, eOtherPlayer);
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_VASSALAGE)
+	else if(eItem == TRADE_ITEM_VASSALAGE)
 		iItemValue = GetVassalageValue(bFromMe, eOtherPlayer, bUseEvenValue, GET_TEAM(GetPlayer()->getTeam()).isAtWar(GET_PLAYER(eOtherPlayer).getTeam()));
-	else if(MOD_DIPLOMACY_CIV4_FEATURES && eItem == TRADE_ITEM_VASSALAGE_REVOKE)
+	else if(eItem == TRADE_ITEM_VASSALAGE_REVOKE)
 		iItemValue = GetRevokeVassalageValue(bFromMe, eOtherPlayer, bUseEvenValue, GET_TEAM(GetPlayer()->getTeam()).isAtWar(GET_PLAYER(eOtherPlayer).getTeam()));
 #endif
 
@@ -3471,17 +3471,17 @@ void CvDealAI::DoAddItemsToDealForPeaceTreaty(PlayerTypes eOtherPlayer, CvDeal* 
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
 	bBecomeMyVassal = pLosingPlayer->GetDiplomacyAI()->IsVassalageAcceptable(eWinningPlayer, true);
-	bRevokeMyVassals = MOD_DIPLOMACY_CIV4_FEATURES && GET_TEAM(pLosingPlayer->getTeam()).GetNumVassals() > 0 && eTreaty >= PEACE_TREATY_CAPITULATION;
+	bRevokeMyVassals = GET_TEAM(pLosingPlayer->getTeam()).GetNumVassals() > 0 && eTreaty >= PEACE_TREATY_CAPITULATION;
 
 	// If losing player is willing to become a vassal, reduce the amount of other stuff he'll give up.
-	if(MOD_DIPLOMACY_CIV4_FEATURES && bBecomeMyVassal)
+	if(bBecomeMyVassal)
 	{
 		iPercentCitiesGiveUp = std::min(iPercentCitiesGiveUp, 50);
 		iPercentGoldToGive = std::min(iPercentCitiesGiveUp, 50);
 	}
 
 	// Is losing player willing to revoke his vassals?
-	if(MOD_DIPLOMACY_CIV4_FEATURES && bRevokeMyVassals)
+	if(bRevokeMyVassals)
 	{
 		//If we're willing to do this, give less below.
 		bRevokeMyVassals = true;
@@ -3686,14 +3686,14 @@ void CvDealAI::DoAddItemsToDealForPeaceTreaty(PlayerTypes eOtherPlayer, CvDeal* 
 	}
 
 #if defined(MOD_DIPLOMACY_CIV4_FEATURES)
-	if(MOD_DIPLOMACY_CIV4_FEATURES && bBecomeMyVassal)
+	if(bBecomeMyVassal)
 	{
 		if(pDeal->IsPossibleToTradeItem(eLosingPlayer, eWinningPlayer, TRADE_ITEM_VASSALAGE))
 		{
 			pDeal->AddVassalageTrade(eLosingPlayer);
 		}
 	}
-	if(MOD_DIPLOMACY_CIV4_FEATURES && bRevokeMyVassals)
+	if(bRevokeMyVassals)
 	{
 		if(pDeal->IsPossibleToTradeItem(eLosingPlayer, eWinningPlayer, TRADE_ITEM_VASSALAGE_REVOKE))
 		{
